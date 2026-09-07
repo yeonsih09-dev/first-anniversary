@@ -1,0 +1,7477 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>우리의 1주년</title>
+
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+
+
+    <!-- 기존 글꼴 -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap"
+          rel="stylesheet">
+
+
+    <style>
+
+        /* =========================
+           기본 설정
+        ========================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+
+            width: 100%;
+            height: 100%;
+
+            margin: 0;
+            padding: 0;
+
+            background: black;
+            color: white;
+
+            font-family: "Gowun Dodum", sans-serif;
+
+        }
+
+
+        body {
+            overflow: hidden;
+        }
+
+
+        /* =========================
+           모든 화면
+        ========================= */
+
+        .screen {
+
+            position: fixed;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            display: none;
+
+            background: black;
+
+            color: white;
+
+            text-align: center;
+
+        }
+
+
+        .screen.active {
+            display: flex;
+        }
+
+
+        /* =========================
+           뒤로가기
+        ========================= */
+
+        .back-button {
+
+            position: fixed;
+
+            top: 15px;
+            left: 15px;
+
+            width: 45px;
+            height: 45px;
+
+            z-index: 99999;
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            background: transparent;
+
+            border: none;
+
+            color: white;
+
+            font-family: sans-serif;
+            font-size: 32px;
+
+            cursor: pointer;
+
+        }
+
+
+        /* =========================
+           첫 화면
+        ========================= */
+
+        #intro {
+
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+        }
+
+
+        #intro h1 {
+
+            margin: 0;
+
+            font-size: 45px;
+            font-weight: normal;
+
+        }
+
+
+        #intro .date {
+
+            margin-top: 20px;
+
+            font-size: 30px;
+
+        }
+
+
+        .for-name {
+    
+            position: absolute;
+    
+            bottom: 45px;
+    
+            right: 25px;
+    
+            font-size: 11px;
+    
+            color: #555555;
+
+        }
+
+
+        .made-by {
+    
+            position: absolute;
+    
+            bottom: 25px;
+    
+            right: 25px;
+    
+            font-size: 11px;
+    
+            color: #555555;
+
+        }
+
+        .touch-text {
+
+            color: #666666;
+
+            font-size: 16px;
+
+        }
+
+
+        #intro .touch-text {
+
+            margin-top: 45px;
+
+        }
+
+
+        /* =========================
+           두 번째 화면
+        ========================= */
+
+        #firework {
+
+            position: relative;
+
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            overflow: hidden;
+
+        }
+
+
+        #firework h1 {
+
+            position: relative;
+
+            z-index: 10;
+
+            margin: 0;
+
+            font-size: 45px;
+            font-weight: normal;
+
+        }
+
+
+        #firework .touch-text {
+
+            position: relative;
+
+            z-index: 10;
+
+            margin-top: 40px;
+
+        }
+
+
+        /* =========================
+           폭죽
+        ========================= */
+
+        .particle {
+
+            position: absolute;
+
+            width: 5px;
+            height: 5px;
+
+            border-radius: 50%;
+
+            pointer-events: none;
+
+        }
+
+
+        /* =========================
+           세 번째 메뉴
+        ========================= */
+
+        #menu {
+
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            gap: 15px;
+
+            padding: 70px 20px 30px;
+
+        }
+
+
+        #menu {
+            overflow-y: auto;
+        }
+
+        .choice {
+
+            width: 300px;
+            height: 65px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            background: #181818;
+
+            border: 1px solid #333333;
+
+            border-radius: 8px;
+
+            color: white;
+
+            font-family: inherit;
+
+            font-size: 28 px;
+
+            cursor: pointer;
+
+            transition: 0.15s;
+
+        }
+
+
+        .choice:active {
+
+            transform: scale(0.96);
+
+            background: #252525;
+
+        }
+
+
+        /* =========================
+           질문 화면
+        ========================= */
+
+        .question-screen {
+
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            padding: 70px 20px 30px;
+
+        }
+
+
+        .question-screen h1 {
+
+            margin: 0 0 40px;
+
+            font-size: 45px;
+
+            font-weight: normal;
+
+            line-height: 1.5;
+
+        }
+
+
+        .yes-no {
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            gap: 15px;
+
+        }
+
+
+        .yes-no button {
+
+            width: 180px;
+            height: 65px;
+
+            background: #181818;
+
+            border: 1px solid #333333;
+
+            border-radius: 8px;
+
+            color: white;
+
+            font-family: inherit;
+
+            font-size: 30px;
+
+            cursor: pointer;
+
+        }
+
+
+        .yes-no button:active {
+
+            transform: scale(0.96);
+
+            background: #252525;
+
+        }
+
+
+        /* =========================
+           일반 큰 문구 화면
+        ========================= */
+
+        .message-screen {
+
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            padding: 70px 20px 30px;
+
+        }
+
+
+        .message-screen h1 {
+
+            margin: 0;
+
+            font-size: 45px;
+
+            font-weight: normal;
+
+            line-height: 1.5;
+
+        }
+
+
+        .message-screen .touch-text {
+
+            margin-top: 40px;
+
+            font-size: 20px;
+
+        }
+
+
+        /* =========================
+           일기
+        ========================= */
+
+        #diary {
+
+            flex-direction: column;
+
+            align-items: center;
+
+            overflow-y: auto;
+
+            text-align: left;
+
+            padding: 80px 30px 50px;
+
+            scrollbar-width: none;
+    
+            -ms-overflow-style: none;
+
+        }
+
+        #diary::-webkit-scrollbar {
+  
+            display: none;
+
+        }
+
+
+        #diary h1 {
+
+            margin: 30 0 35px;
+
+            font-size: 50px;
+
+            font-weight: normal;
+
+            text-align: center;
+
+            transform: translateX(-30px);
+        }
+
+
+        .diary-content {
+
+            width: 100%;
+
+            max-width: 700px;
+
+            margin-left: 50px;
+
+            font-size: 18px;
+
+            line-height: 2;
+
+            white-space: pre-line;
+
+        }
+
+
+        /* =========================
+           1년 간의 이야기
+        ========================= */
+
+        #scrapbook {
+
+            flex-direction: column;
+
+            align-items: center;
+
+            padding: 70px 20px 25px;
+
+            overflow: hidden;
+
+            background: black;
+
+        }
+
+
+        .scrapbook-title {
+
+            margin-bottom: 15px;
+
+            font-size: 45px;
+
+            font-weight: normal;
+          
+        }
+
+
+        .scrapbook-page {
+
+            position: relative;
+
+            display: none;
+
+            width: 90%;
+
+            max-width: 700px;
+
+            height: 70vh;
+
+            background-color: #222222;
+
+            color: #eeeeee;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: flex-start;
+
+            padding: 20px 20px 10px;
+
+            gap: 10px;
+
+            border-radius: 3px;
+
+            background-image:
+                linear-gradient(
+                    transparent 31px,
+                    #3a3a3a 32px
+                );
+
+            background-size: 100% 32px;
+
+            box-shadow:
+                0 8px 25px rgba(255,255,255,0.12);
+
+        }
+
+
+        .scrapbook-page.active {
+
+            display: flex;
+
+            animation: pageTurn 0.45s ease;
+
+        }
+
+
+        @keyframes pageOpen {
+
+            0% {
+
+                opacity: 0;
+
+                transform:
+                    perspective(1000px)
+                    rotateY(-90deg)
+                    translateX(20px);
+
+            }
+
+            100% {
+
+                opacity: 1;
+
+                transform:
+                    perspective(1000px)
+                    rotateY(0deg)
+                    translateX(0);
+
+            }
+
+        }
+
+
+        .scrap-photo {
+
+            width: 75%;
+
+            max-width: 330px;
+
+            aspect-ratio: 1 / 1;
+
+            background: #e8e8e8;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            overflow: hidden;
+
+            transform: translateY(0px);
+
+        }
+
+        /* =================================
+           스크랩북 사진 공통
+        ================================= */
+
+        .scrap-photo {
+            width: 100%;
+            max-width: 430px;
+            height: 400px;
+
+            display: grid;
+
+            gap: 5px;
+            padding: 5px;
+
+            background: #eeeeee;
+
+            border: 3px solid #eeeeee;
+
+            overflow: hidden;
+        
+            align-items: center;
+            justify-items: center;
+        }
+
+        /* 모든 사진 공통*/
+
+        .scrap-photo img {
+            width: 100%;
+            height: 100%;
+            min-width: 0;
+            min-height: 0; 
+            object-fit: cover;
+            display: block;
+        }
+
+        /* =================================
+            사진 개수별 배열
+        ================================= */
+
+        /* 1장 */
+
+        .scrap-photo.photo-grid-1 {
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr;
+            max-width: 300px;
+        }
+
+        /* 2장 */
+
+        .scrap-photo.photo-grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: 1fr;
+            max-width: 550px;
+        }
+
+        /* 3장 */
+
+        .scrap-photo.photo-grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: 1fr;
+            max-width: 600px;
+        }
+
+        /* 4장 → 2 × 2 */
+
+        .scrap-photo.photo-grid-4 {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            max-width: 550px;
+        }
+
+        /* 6장 → 3 × 2 */
+
+        .scrap-photo.photo-grid-6 {
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            max-width: 550px;
+        }
+
+        /* 8장 → 4 × 2 */
+
+        .scrap-photo.photo-grid-8 {
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            max-width: 600px;
+        }
+
+
+        .placeholder {
+
+            color: #888;
+
+            font-size: 15px;
+
+        }
+
+        .scrap-letter {
+
+            width: 100%;
+
+            padding: 0;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+
+            text-align: left;
+
+        }
+
+
+        /* =========================
+           이전 / 다음
+        ========================= */
+
+        .scrap-navigation {
+
+            width: 100%;
+            max-width: 700px;
+
+            margin-top: 15px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 25px;
+            
+            padding: 10px 0;
+
+            flex-shrink: 0;
+        }
+
+        
+
+
+        .scrap-navigation button {
+
+            background: transparent;
+
+            border: none;
+
+            color: white;
+
+            font-family: inherit;
+        
+            font-size: 18px;
+                
+            cursor: pointer;
+        
+            padding: 8px 12px;
+        
+        }
+
+
+        .scrap-navigation button:active {
+
+            transform: scale(0.95);
+
+        }
+
+        .page-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .page-button {
+            background: transparent;
+            border: none;
+            color: white;
+            font-family: inherit;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .page-number {
+            font-size: 18px;
+            white-space: nowrap;
+        }   
+
+
+        /* 처음 페이지에서는 이전 숨김 */
+
+        .scrap-navigation .prev-button {
+
+            visibility: visible;
+
+        }     
+
+
+        /* 마지막 페이지에서는 다음 숨김 */
+
+        .scrap-navigation .next-button {
+
+            visibility: hidden;
+
+        }
+
+
+        /* 휴대폰 */
+
+        @media (max-width: 600px) {
+
+            #scrapbook {
+
+                padding:
+                    65px 10px 20px;
+
+            }
+
+
+            .scrapbook-title {
+
+                font-size: 34px;
+
+                margin-bottom: 10px;
+
+            }
+
+
+            .scrapbook-page {
+
+                width: 92%;
+
+                height: 67vh;
+        
+                padding: 30px 20px;
+
+                gap: 18px;
+        
+            }
+
+
+            .scrap-photo {
+
+                width: 75%;
+
+                max-width: 260px;
+
+            }
+
+
+            .scrap-letter {
+
+                width: 100%;
+
+                padding: 0;
+
+                font-size: 13px;
+
+                line-height: 1.8;
+
+            }
+
+
+            .scrap-navigation {
+
+                width: 92%;
+
+                margin-top: 10px;
+
+                gap: 20px;
+
+            }
+
+
+            .scrap-navigation button {
+
+                font-size: 15px;
+
+            }
+
+        }
+        
+        
+        /* =========================
+            휴대폰 19.5 : 9 기준
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            html,
+            body {
+                width: 100%;
+                height: 100%;
+                min-height: 100dvh;
+            }
+
+             .screen {
+                width: 100vw;
+                height: 100dvh;
+                min-height: 100dvh;
+                overflow-x: hidden;
+            }
+        }
+
+        /* =========================
+            화살표
+        ========================= */
+
+        .arrow {
+
+            position: absolute;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            width: 45px;
+            height: 60px;
+
+            background: transparent;
+
+            border: none;
+
+            color: white;
+
+            font-size: 40px;
+
+            font-family: sans-serif;
+
+            cursor: pointer;
+
+            z-index: 20;
+
+        }
+
+
+        .arrow-left {
+
+            left: 0;
+
+        }
+
+
+        .arrow-right {
+
+            right: 0;
+
+        }
+
+
+        .first-page .arrow-left {
+
+            display: none;
+
+        }
+
+
+        .last-page .arrow-right {
+
+            display: none;
+
+        }
+
+
+        .first-button {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: auto;
+            height: 60px;
+            padding: 0;
+            background: transparent;
+            border: none;  
+            color: #666666;
+            font-family: inherit;
+            font-size: 18px;
+            cursor: pointer;
+            white-space: nowrap;
+            z-index: 20;
+        }
+
+
+        /* =========================
+           버킷리스트
+        ========================= */
+
+        #bucket-list {
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: flex-start;
+
+            text-align: left;
+
+            padding: 75px 20px 40px;
+
+            overflow-y: auto;
+            overflow-x: hidden;
+
+            background: black;
+
+            color: white;
+
+            font-family: "Gowun Dodum", sans-serif;
+
+        }
+
+
+        #bucket-list h2 {
+
+            width: 100%;
+
+            margin: 0 0 30px;
+
+            text-align: center;
+
+            font-size: 34px;
+
+            font-weight: normal;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .bucket-container {
+
+            width: 100%;
+
+            max-width: 500px;
+
+            margin: 0 auto;
+
+            padding-bottom: 20px;
+
+        }
+
+
+        .bucket-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            width: 100%;
+
+            min-height: 55px;
+
+            padding: 12px 10px;
+
+            border-bottom: 1px solid #333;
+
+            color: white;
+
+            font-size: 15px;
+
+            cursor: pointer;
+
+        }
+
+
+        .bucket-item input[type="checkbox"] {
+
+            width: 22px;
+            height: 22px;
+
+            flex-shrink: 0;
+
+            accent-color: white;
+
+        }
+
+
+        .bucket-item span {
+
+            color: white;
+
+        }
+
+
+        .bucket-item input[type="checkbox"]:checked + span {
+
+            text-decoration: line-through;
+
+            opacity: 0.5;
+
+        }
+
+
+        .bucket-question {
+
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            align-items: center;
+            justify-content: center;
+
+            flex-direction: column;
+
+            background: rgba(0, 0, 0, 0.85);
+
+            z-index: 100;
+        }
+
+        .bucket-question-buttons {
+
+            display: flex;
+
+            gap: 30px;
+
+            margin-top: 25px;
+        }
+
+        .bucket-question button {
+
+            background: transparent;
+
+            border: none;
+
+            color: white;
+
+            font-family: inherit;
+
+            font-size: 18px;
+
+            cursor: pointer;
+        }
+
+
+        .bucket-check {
+            display: none;
+
+            width: 25px;
+
+            margin-right: 10px;
+
+            color: white;
+        }
+
+
+        .bucket-item.completed {
+   
+            color: #aaa;
+
+        }
+
+        .bucket-question.show {
+
+            display: flex;
+
+        }
+
+
+        .bucket-question-box {
+
+            width: min(90%, 360px);
+
+            padding: 30px 20px;
+
+            background: #181818;
+
+            border: 1px solid #333333;
+
+            border-radius: 8px;
+
+            text-align: center;
+
+        }
+
+
+        .bucket-question-text {
+
+            margin-bottom: 25px;
+
+            font-size: 24px;
+
+        }
+
+
+        .bucket-yes-no {
+
+            flex-direction: row;
+
+            justify-content: center;
+
+        }
+
+
+        .bucket-yes-no button {
+
+            width: 110px;
+            height: 55px;
+
+            font-size: 22px;
+
+        }
+
+
+        /* =========================
+           별종이 설명서
+        ========================= */
+
+        #manual {
+
+            flex-direction: column;
+
+            align-items: center;
+
+            padding: 70px 20px 30px;
+
+            overflow: hidden;
+
+        }
+
+
+        .manual-title {
+
+            margin-bottom: 10px;
+
+            font-size: 30px;
+
+        }
+
+
+        .manual-page {
+
+            position: relative;
+
+            display: none;
+
+            width: 100%;
+            max-width: 850px;
+
+            flex: 1;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 25px;
+
+        }
+
+
+        .manual-page.active {
+
+            display: flex;
+
+        }
+
+
+        .manual-photo {
+
+            width: 42%;
+            max-width: 330px;
+
+            aspect-ratio: 1 / 1;
+
+            background: #181818;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+
+        }
+
+
+        .manual-photo img {
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+        }
+
+
+        .manual-description {
+
+            width: 42%;
+
+            font-size: 20px;
+
+            line-height: 1.8;
+
+            text-align: left;
+
+        }
+        /* =========================
+           ! 누르지마시오
+        ========================= */
+
+        #dont {
+
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            cursor: pointer;
+
+        }
+
+
+        #dont .first-message {
+
+            font-size: 45px;
+
+            line-height: 1.5;
+
+        }
+
+
+        #dont .second-message {
+
+            margin-top: 30px;
+
+            font-size: 45px;
+
+            line-height: 1.5;
+
+            opacity: 0;
+
+        }
+
+
+        #dont .second-message.show {
+
+            animation: fadeIn 0.5s forwards;
+
+        }
+
+
+        @keyframes fadeIn {
+
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+
+        }
+
+
+        /* =========================
+           사랑해
+        ========================= */
+
+        #love {
+
+            position: relative;
+
+            justify-content: center;
+            align-items: center;
+
+            overflow: hidden;
+
+        }
+
+
+        #love h1 {
+
+            position: relative;
+
+            z-index: 10;
+
+            font-size: 45px;
+
+            font-weight: normal;
+
+        }
+
+        #coupon-list {
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-top: 30px;
+
+        }
+
+        /* =========================
+           쿠폰함 열기
+        ========================= */
+
+        .coupon-question {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .coupon-open {
+            width: 340px;
+            height: 90px;
+
+            background: #181818;
+
+            border: 1px solid #333333;
+            border-radius: 8px;
+
+            color: white;
+
+            font-family: inherit;
+
+            font-size: 45px;
+
+            cursor: pointer;
+
+            transition: 0.15s;
+        }
+
+
+        .coupon-open:active {
+            transform: scale(0.96);
+
+            background: #252525;
+        }
+
+
+        /* =========================
+           실제 쿠폰 화면
+        ========================= */
+
+        .coupon-screen {
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            padding: 70px 20px 30px;
+
+            overflow-y: auto;
+        }
+
+        .coupon-screen {
+    
+            scrollbar-width: none;
+   
+            -ms-overflow-style: none;
+
+        }
+
+
+        .coupon-screen::-webkit-scrollbar {
+  
+            display: none;
+
+        }
+
+
+        .coupon-list {
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            gap: 15px;
+
+            width: 100%;
+        }
+
+
+        /* =========================
+           쿠폰 목록
+        ========================= */
+
+        .coupon {
+            width: 300px;
+            min-height: 65px;
+
+            padding: 12px 18px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        
+            background: #181818;
+        
+            border: 1px solid #333333;
+            border-radius: 8px;
+
+            color: white;
+
+            font-family: inherit;
+            font-size: 18px;
+
+            cursor: pointer;
+
+            transition: 0.15s;
+        }
+
+        .coupon:active {
+            transform: scale(0.96);
+            background: #252525;
+        }
+
+        .coupon-used {
+            color: #888888;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+
+        /* =========================
+           쿠폰 상세 화면
+        ========================= */
+
+        .coupon-detail-screen {
+
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            padding: 70px 20px 30px;
+
+            perspective: 1000px;
+        }
+
+
+        /* =========================
+           쿠폰 카드
+        ========================= */
+
+        .coupon-card {
+
+            position: relative;
+
+            width: 330px;
+            height: 210px;
+
+            transform-style: preserve-3d;
+
+            cursor: pointer;
+
+            transition: transform 0.6s;
+
+        }
+
+
+        /* 뒤집힌 상태 */
+
+        .coupon-card.flipped {
+
+            transform: rotateY(180deg);
+
+        }
+
+
+        /* =========================
+           쿠폰 앞/뒷면
+        ========================= */
+
+        .coupon-face {
+
+            position: absolute;
+
+            inset: 0;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            padding: 25px;
+
+            background: #181818;
+
+            border: 1px solid #333333;
+
+            border-radius: 12px;
+
+            backface-visibility: hidden;
+
+            -webkit-backface-visibility: hidden;
+
+        }
+
+
+        /* 앞면 */
+
+        .coupon-front {
+
+            transform: rotateY(0deg);
+
+        }
+
+
+        /* 뒷면 */
+
+        .coupon-back {
+
+            transform: rotateY(180deg);
+
+            gap: 25px;
+        
+        }
+
+
+        /* =========================
+           쿠폰 글씨
+        ========================= */
+
+        .coupon-detail-title {
+
+            font-size: 32px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .coupon-hint {
+
+            margin-top: 20px;
+
+            color: #666666;
+
+            font-size: 14px;
+
+        }
+
+
+        .coupon-description {
+
+            font-size: 19px;
+
+            line-height: 1.8;
+
+            text-align: center;
+
+        }
+
+
+        /* =========================
+           사용 체크
+        ========================= */
+
+        .used-check {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+        }
+
+
+        .used-check input {
+
+            width: 18px;
+            height: 18px;
+        
+            cursor: pointer;
+
+        }
+
+        
+
+
+
+
+        /* =========================
+           휴대폰 화면
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .choice {
+
+                width: 300px;
+                height: 65px;
+
+                font-size: 30px;
+
+            }
+
+
+            .question-screen h1 {
+
+                font-size: 45px;
+
+            }
+
+
+            .scrapbook-page,
+            .manual-page {
+
+                gap: 15px;
+
+            }
+
+
+            .scrap-photo,
+            .manual-photo {
+
+                width: 43%;
+
+            }
+
+
+            .scrap-letter {
+
+                width: 43%;
+
+                font-size: 16px;
+
+            }
+
+
+            .manual-description {
+
+                width: 43%;
+
+                font-size: 20px;
+
+            }
+
+
+            .arrow {
+
+                font-size: 32px;
+
+                width: 35px;
+
+            }
+
+
+            .arrow-left {
+
+                left: -5px;
+
+            }
+
+
+            .arrow-right {
+
+                right: -5px;
+
+            }
+
+        }
+
+
+            .password-box {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .password-box input {
+                width: 240px;
+                height: 55px;
+
+                padding: 0 15px;
+
+                background: #181818;
+
+                border: 1px solid #333333;
+                border-radius: 8px;
+            
+                color: white;
+
+                font-family: inherit;
+                font-size: 18px;
+
+                text-align: center;
+
+                outline: none;
+            }
+
+            .password-box input::placeholder {
+                color: #666666;
+            }
+
+            .password-box button {
+                width: 120px;
+                height: 50px;
+            
+                background: #181818;
+            
+                border: 1px solid #333333;
+                border-radius: 8px;
+
+                color: white;
+
+                font-family: inherit;
+                font-size: 20px;
+
+                cursor: pointer;
+            }
+
+            .password-message {
+                margin-top: 20px;
+
+                color: #888888;
+
+                font-size: 15px;
+            }
+
+
+            .fortune-text {
+                margin-top: 35px;
+
+                width: 280px;
+                min-height: 100px;
+
+                padding: 20px;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                background: #181818;
+
+                border: 1px solid #333333;
+                border-radius: 8px;
+            
+                font-size: 22px;
+                line-height: 1.8;
+
+                text-align: center;
+            }
+
+            /* 운세 결과 화면은 문장만 표시 */
+            #fortuneResult .fortune-text {
+                margin-top: 0;
+                width: auto;
+                min-height: 0;
+                padding: 0;
+                background: transparent;
+                border: none;
+                border-radius: 0;
+            }
+
+            
+            .fortune-button {
+                margin-top: 30px;
+
+                width: 180px;
+                height: 60px;
+
+                background: #181818;
+            
+                border: 1px solid #333333;
+                border-radius: 8px;
+
+                color: white;
+
+                font-family: inherit;
+                font-size: 20px;
+
+                cursor: pointer;
+            }
+
+
+        @media (max-width: 350px) {
+
+            .choice {
+
+                width: 280px;
+
+                font-size: 26px;
+
+            }
+
+        }
+
+    
+
+/* ==================================================
+   수정사항 1~18 - 최종 모바일 디자인
+================================================== */
+
+/* 1~3. 1주년 편지 */
+#diary {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#diary h1 {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    transform: none;
+    text-align: center;
+}
+
+.diary-content {
+    width: 40%;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 16px;
+    line-height: 2;
+}
+
+/* 4. 스크랩북 사진/글자 */
+#scrapbook {
+    position: relative;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.scrapbook-page {
+    width: 92%;
+    padding-left: 10px;
+    padding-right: 10px;
+    gap: 10px;
+}
+
+.scrap-photo {
+    width: 100%;
+    max-width: 360px;
+    height: 300px;
+}
+
+.scrap-photo img {
+    object-fit: cover;
+    background: #111111;
+}
+
+.scrap-letter {
+    width: 100%;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* 5, 12. 버킷리스트 제목 */
+#bucket-list h2 {
+    font-size: 40px;
+}
+
+/* 6, 13. 별종이: 사진 아래 설명 */
+.manual-page {
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.manual-photo {
+    width: 100%;
+    max-width: 330px;
+}
+
+.manual-description {
+    width: 90%;
+    font-size: 16px;
+    line-height: 1.8;
+    text-align: center;
+}
+
+.first-button {
+    position: static;
+    transform: none;
+    width: auto;
+    height: auto;
+    margin-top: 8px;
+    padding: 6px 12px;
+    font-size: 18px;
+    align-self: center;
+}
+
+/* 9. 스크랩북 좌/우 화살표와 처음으로 */
+#scrapbook .scrap-navigation {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+    pointer-events: none;
+    z-index: 30;
+}
+
+#scrapbook .scrap-navigation .prev-button,
+#scrapbook .scrap-navigation .next-button {
+    position: absolute;
+    top: 50%;
+    width: 45px;
+    height: 60px;
+    margin: 0;
+    padding: 0;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: white;
+    font-family: sans-serif;
+    font-size: 40px;
+    pointer-events: auto;
+}
+
+#scrapbook .scrap-navigation .prev-button {
+    left: 0;
+}
+
+#scrapbook .scrap-navigation .next-button {
+    right: 0;
+}
+
+#scrapbook .scrap-navigation .page-number {
+    position: absolute;
+    left: 50%;
+    bottom: 8px;
+    transform: translateX(-50%);
+    font-size: 15px;
+}
+
+/* 16. 쿠폰 목록 글자 */
+.coupon {
+    font-size: 22px;
+}
+
+/* 18. 운세 */
+.fortune-text {
+    min-height: 110px;
+}
+
+#fortune .fortune-button {
+    transition: 0.15s;
+}
+
+/* 버킷리스트 추가 */
+.bucket-add-area {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    max-width: 700px;
+    padding: 0 5px 15px;
+    flex-shrink: 0;
+}
+
+.bucket-add-input {
+    flex: 1;
+    min-width: 0;
+    height: 48px;
+    padding: 0 12px;
+    background: #181818;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    color: white;
+    font-family: inherit;
+    font-size: 16px;
+    outline: none;
+}
+
+.bucket-add-input::placeholder {
+    color: #666666;
+}
+
+.bucket-add-button {
+    width: 70px;
+    height: 48px;
+    background: #181818;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    color: white;
+    font-family: inherit;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.bucket-add-message {
+    min-height: 22px;
+    color: #888888;
+    font-size: 13px;
+    text-align: center;
+    padding-bottom: 8px;
+}
+
+/* PWA 설치 버튼 */
+.install-choice {
+    border-color: #555555;
+}
+
+@media (max-width: 600px) {
+    #diary {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    #diary h1 {
+        transform: none;
+        font-size: 45px;
+    }
+
+    .diary-content {
+        font-size: 16px;
+    }
+
+    .scrapbook-page {
+        width: 92%;
+        height: 67vh;
+        padding: 20px 10px;
+        gap: 10px;
+    }
+
+    .scrap-photo,
+    .scrap-photo.photo-grid-1,
+    .scrap-photo.photo-grid-2,
+    .scrap-photo.photo-grid-3,
+    .scrap-photo.photo-grid-4,
+    .scrap-photo.photo-grid-6,
+    .scrap-photo.photo-grid-8 {
+        width: 100%;
+        max-width: 360px;
+        height: 300px;
+    }
+
+    .scrap-letter {
+        width: 100%;
+        padding: 0 8px;
+        font-size: 12px;
+        line-height: 1.7;
+    }
+
+    #bucket-list h2 {
+        font-size: 36px;
+    }
+
+    .bucket-add-area {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .manual-page {
+        gap: 10px;
+    }
+
+    .manual-photo {
+        width: 90%;
+        max-width: 320px;
+    }
+
+    .manual-description {
+        width: 88%;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .first-button {
+        position: static;
+        transform: none;
+        margin-top: 8px;
+    }
+
+    #scrapbook .scrap-navigation .prev-button,
+    #scrapbook .scrap-navigation .next-button {
+        font-size: 32px;
+        width: 35px;
+    }
+
+    #scrapbook .scrap-navigation .prev-button {
+        left: -2px;
+    }
+
+    #scrapbook .scrap-navigation .next-button {
+        right: -2px;
+    }
+
+    .coupon {
+        font-size: 20px;
+    }
+}
+
+
+
+/* ==================================================
+   수정사항 1~18 - 최종 모바일 디자인
+================================================== */
+
+/* 1~3. 1주년 편지 */
+#diary {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#diary h1 {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    transform: none;
+    text-align: center;
+}
+
+.diary-content {
+    width: 90%;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 16px;
+    line-height: 2;
+    transform: translateY(-15px);
+}
+
+/* 4. 스크랩북 사진/글자 */
+#scrapbook {
+    position: relative;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.scrapbook-page {
+    width: 92%;
+    padding-left: 10px;
+    padding-right: 10px;
+    gap: 10px;
+}
+
+.scrap-photo {
+    width: 100%;
+    max-width: 360px;
+    height: 300px;
+}
+
+.scrap-photo img {
+    object-fit: cover;
+    background: #111111;
+}
+
+.scrap-letter {
+    width: 100%;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* 5, 12. 버킷리스트 제목 */
+#bucket-list h2 {
+    font-size: 40px;
+}
+
+/* 6, 13. 별종이: 사진 아래 설명 */
+.manual-page {
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.manual-photo {
+    width: 100%;
+    max-width: 330px;
+}
+
+.manual-description {
+    width: 90%;
+    font-size: 16px;
+    line-height: 1.8;
+    text-align: center;
+}
+
+.first-button {
+    position: static;
+    transform: none;
+    width: auto;
+    height: auto;
+    margin-top: 8px;
+    padding: 6px 12px;
+    font-size: 18px;
+    align-self: center;
+}
+
+/* 9. 스크랩북 좌/우 화살표와 처음으로 */
+#scrapbook .scrap-navigation {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+    pointer-events: none;
+    z-index: 30;
+}
+
+#scrapbook .scrap-navigation .prev-button,
+#scrapbook .scrap-navigation .next-button {
+    position: absolute;
+    top: 50%;
+    width: 45px;
+    height: 60px;
+    margin: 0;
+    padding: 0;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: white;
+    font-family: sans-serif;
+    font-size: 40px;
+    pointer-events: auto;
+}
+
+#scrapbook .scrap-navigation .prev-button {
+    left: 0;
+}
+
+#scrapbook .scrap-navigation .next-button {
+    right: 0;
+}
+
+#scrapbook .scrap-navigation .page-number {
+    position: absolute;
+    left: 50%;
+    bottom: 8px;
+    transform: translateX(-50%);
+    font-size: 15px;
+}
+
+/* 16. 쿠폰 목록 글자 */
+.coupon {
+    font-size: 22px;
+}
+
+/* 18. 운세 */
+.fortune-text {
+    min-height: 110px;
+}
+
+#fortune .fortune-button {
+    transition: 0.15s;
+}
+
+/* 버킷리스트 추가 */
+.bucket-add-area {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    max-width: 700px;
+    padding: 0 5px 15px;
+    flex-shrink: 0;
+}
+
+.bucket-add-input {
+    flex: 1;
+    min-width: 0;
+    height: 48px;
+    padding: 0 12px;
+    background: #181818;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    color: white;
+    font-family: inherit;
+    font-size: 16px;
+    outline: none;
+}
+
+.bucket-add-input::placeholder {
+    color: #666666;
+}
+
+.bucket-add-button {
+    width: 70px;
+    height: 48px;
+    background: #181818;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    color: white;
+    font-family: inherit;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.bucket-add-message {
+    min-height: 22px;
+    color: #888888;
+    font-size: 13px;
+    text-align: center;
+    padding-bottom: 8px;
+}
+
+/* PWA 설치 버튼 */
+.install-choice {
+    border-color: #555555;
+}
+
+@media (max-width: 600px) {
+    #diary {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    #diary h1 {
+        transform: none;
+        font-size: 45px;
+    }
+
+    .diary-content {
+        font-size: 16px;
+    }
+
+    .scrapbook-page {
+        width: 92%;
+        height: 67vh;
+        padding: 20px 10px;
+        gap: 10px;
+    }
+
+    .scrap-photo,
+    .scrap-photo.photo-grid-1,
+    .scrap-photo.photo-grid-2,
+    .scrap-photo.photo-grid-3,
+    .scrap-photo.photo-grid-4,
+    .scrap-photo.photo-grid-6,
+    .scrap-photo.photo-grid-8 {
+        width: 100%;
+        max-width: 360px;
+        height: 300px;
+    }
+
+    .scrap-letter {
+        width: 100%;
+        padding: 0 8px;
+        font-size: 12px;
+        line-height: 1.7;
+    }
+
+    #bucket-list h2 {
+        font-size: 36px;
+    }
+
+    .bucket-add-area {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .manual-page {
+        gap: 10px;
+    }
+
+    .manual-photo {
+        width: 90%;
+        max-width: 320px;
+    }
+
+    .manual-description {
+        width: 88%;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .first-button {
+        position: static;
+        transform: none;
+        margin-top: 8px;
+    }
+
+    #scrapbook .scrap-navigation .prev-button,
+    #scrapbook .scrap-navigation .next-button {
+        font-size: 32px;
+        width: 35px;
+    }
+
+    #scrapbook .scrap-navigation .prev-button {
+        left: -2px;
+    }
+
+    #scrapbook .scrap-navigation .next-button {
+        right: -2px;
+    }
+
+    .coupon {
+        font-size: 20px;
+    }
+}
+
+/* =========================
+   스크랩북 페이지 구성
+========================= */
+
+#menu {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+#menu::-webkit-scrollbar {
+    display: none;
+}
+
+.scrapbook-page.scrap-photo-page {
+    padding: 20px;
+}
+
+.scrapbook-page.scrap-photo-page .scrap-photo {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    flex: 1;
+}
+
+/* 15번 기록은 사진과 편지 주위 여백을 모두 같게 맞춥니다. */
+.scrapbook-page[data-original-page="11"] {
+    padding: 20px;
+    gap: 20px;
+}
+
+/* 편지 페이지는 글 길이에 맞추고, 화살표 중앙을 기준으로 놓습니다. */
+#scrapbook .scrapbook-page.scrap-letter-page.active {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: auto;
+    min-height: 0;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+#scrapbook .scrap-navigation .page-number {
+    top: calc(50% + 35vh + 16px);
+    bottom: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 112px;
+    padding: 6px 12px;
+    border: 1px solid #333333;
+    border-radius: 999px;
+    background: rgba(24, 24, 24, 0.9);
+    color: #dddddd;
+    letter-spacing: 0.04em;
+}
+
+@media (max-width: 600px) {
+    #scrapbook .scrapbook-page.scrap-letter-page.active {
+        max-height: 67vh;
+    }
+
+    #scrapbook .scrap-navigation .page-number {
+        top: calc(50% + 33.5vh + 12px);
+    }
+}
+
+</style>
+
+</head>
+
+
+<!-- ==================================================
+     뒤로가기 버튼
+================================================== -->
+
+<button
+    class="back-button"
+    onclick="goBack()"
+    aria-label="뒤로가기">
+    ←
+</button>
+
+
+
+<!-- ==================================================
+     1. 첫 화면
+================================================== -->
+
+<section
+    id="intro"
+    class="screen active">
+
+    <h1>
+        1주년
+    </h1>
+
+    <div class="date">
+        2026.10.26
+    </div>
+
+    <div class="for-name">
+        for. 정환
+    </div>
+
+    <div class="made-by">
+        made. 시현
+    </div>
+
+    <div class="touch-text">
+        화면을 터치해주세요
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     2. 폭죽 화면
+================================================== -->
+
+<section
+
+    id="firework"
+    class="screen">
+
+    <h1>1주년 축하해</h1>
+
+    <div class="touch-text">
+        화면을 터치해주세요
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     3. 메뉴
+================================================== -->
+
+<section
+    id="menu"
+    class="screen">
+
+
+    <button
+        class="choice"
+        onclick="openDiaryQuestion()">
+
+        편지
+
+    </button>
+
+
+    <button
+        class="choice"
+        onclick="openScrapQuestion()">
+
+        1년 간의 이야기
+
+    </button>
+
+
+    <button
+        class="choice"
+        onclick="openDont()">
+
+        누르지마시오!
+
+    </button>
+
+    <button 
+        class="choice"
+        onclick="openBucketList()">
+        버킷리스트
+    </button>
+
+
+    <button
+        class="choice"
+        onclick="openManualQuestion()">
+
+        별종이 내 글자보는 법
+
+    </button>
+    <button
+        class="choice"
+        onclick="openFortune()">
+
+        운세확인
+
+    </button>
+
+
+    <button
+        class="choice"
+        onclick="openCoupon()">
+
+        쿠폰함
+
+    </button>
+
+
+    <button
+        id="install-app"
+   
+        class="choice install-choice"
+        onclick="installApp()">
+
+        앱으로 저장하기
+
+    </button>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     4. 일기 질문
+================================================== -->
+
+<section
+    id="diary-question"
+    class="screen question-screen">
+
+
+    <h1>
+        1주년 편지
+    </h1>
+
+    <div class="password-box">
+
+        <input
+            type="password"
+            id="diaryPassword"
+            placeholder="비밀번호"
+            autocomplete="off"
+            inputmode="numeric">
+
+        <button onclick="checkDiaryPassword()">
+            확인
+        </button>
+
+    </div>
+
+    <div
+        id="diaryPasswordMessage"
+        class="password-message">
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     6. 일기 NO
+================================================== -->
+
+<section
+    id="diary-no"
+    class="screen message-screen">
+
+
+    <h1>
+        1주년 편지
+    </h1>
+
+
+    <div class="touch-text">
+        화면을 터치해주세요
+    </div>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     7. 실제 일기
+================================================== -->
+
+<section
+    id="diary"
+    class="screen">
+
+
+    <h1>
+        1주년 편지
+    </h1>
+
+
+    <div class="diary-content">
+
+안녕 바보야. 
+일단 1주년 축하해!! 벌써 1년이라는 시간이 흘렀네
+1년동안 여러가지 일도 많았고 위태위태하던 시기도 있었지만(내 기준,,) 우리의 만남의 생일을 이렇게 축하할 수 있게 되어 기뻐.
+
+그동안 노력도 관심도 많이 준 거 아는데 자꾸 욕심부리고 서운해해서 미안해, 나도 속으로는 너 나름대로 엄청 노력을 많이 하고 있다는 걸 알고있는데,, 그 노력의 방향이 내가 원하던 방향과 좀 달랐던 거 아닐까 생각이 들어
+
+비교를 하려는 건 아니지만 전에 했던 연애에선 돈을 쓰기도 아까워했고 시간 내는 것도, 내가 먼저 나서서 '이거하자'. 하는 것도 안 좋아했는데 널 만나니까 알았어. 이게 진짜 좋아하는 거구나,, 그리고 너가 맹장염으로 수술한다고 했던 날 저녁시간에 너한테 갔었잖아,
+그 날 저녁에 '내가 뭘 이렇게 원해서 죽을 힘을 다해 뛴 적이 있었나' 싶었어. 물론 예전에도 누군가를 좋아해본 적은 있지만, 너를 만나면서 '내가 누군가를 이렇게까지 좋아할 수도 있구나' 생각했어. 돈쓰는 것도 널 위해서면 계속 아끼며 너에게 더 쓸 수 있고 내 시간도 다 줄 수 있을 정도로 좋아해. 난 내 시간이 정말 중요하고 지인들은 물론 가족들에게까지도 먼저 놀자고하는게 1년에 손꼽을 정도로 밖을 잘 안 나가는 사람이었는데, 널 만나고 많이 바뀌었어.
+
+내가 그동안 많이 서운해하고 불만을 많이 토로하기도 했고 심지어 시간을 가지자한 적도, 화가나서 하루종일 너랑 말을 잘 안 섞으려고 한 적도 있었어. 그럴 때마다 계속 잡아주고 미안하다고 사과해줘서 고맙고 미안했어. 정말 너가 많이 노력해주고 있다는 걸 아는데도 점점 더 바라고 그걸 너에게 표현하고 화내는 걸(그 당시엔 힘들어서 그랬겠지만,,) 지금와서 돌이켜 보면 너가 진짜 너무 힘들었을 거란 생각이 들어. 정말 미안해. 앞으로는 자기가 날 사랑하는 방식을 내가 원하는 방식과 비교하기보단 자기가 나름대로 표현하고 있는 자기의 사랑을 더 잘 알아보는 사람이 되도록 노력할게. 또, 내 마음을 무조건 서운함으로 표현하기보다는 너 입장에서 한번 더 생각하고 네가 표현하는 마음도 더 장 알아볼 수 있는 사람이 되도록 노력할게. 
+
+자기가 여름방학 때 깜짝선물로 귀걸이를 준 것도, 
+뭘 먹고싶다고 할 때마다 "먹으러 갈까? 사줄까?" 해주는 것도,
+길 가다 차오면 잡아주는 것도, 
+매번 반으로 와주는 것도,
+매번 디엠해주는 것도,
+서운하다 말하면 바로 바꾸려고 노력해주는 것도,
+내 말을 하나하나 기억해주는 것도,
+계속 맞춰주는 것도,
+정문까지 데려다주는 것도,
+장난치고 찡찡거리고 애같이 굴며 
+외계어를 남발해도 받아주는 것 등등
+너무 너무 고마워..
+
+내 계절의 기억들이 점점 너로 가득차. 
+이젠 봄하면 너랑 한 도서관 데이트가, 여름하면 이번에 한 광주데이트가, 가을하면 너에게 2025년 생일선물을 주던 나와 너와 썸타던 수학여행이, 겨울하면 너와 보낸 크리스마스가 떠올라.
+점점 내 일상이 너로 가득차는 이 시점에
+앞으로도 너와 함께한 추억들이 하나씩 더 쌓였으면 좋겠어.
+
+사귀기로 시작한 순간엔 
+100일만이라도 갔으면 좋겠다, 생각하고
+100일 지난 시점엔 200일,
+200일 지난 시점엔 300일,
+300일 지난 시점엔 1년까지라도 
+더 만나고싶다는 생각을 했었어.
+아마 더 만날수록 더더 만나고 싶겠지.
+끝을 보고 하는 연애보다 그냥 흘러가듯이 나중에 
+"벌써 몇주년이네"
+하고 웃으면서 말할 수 있는 연애를 하고싶어.
+이 관계가 언제까지 이어질지는 모르지만 아마 관계가 끝나는 날엔, 내 마음이 마음이 아닐거야.
+
+이 편지 마음에 들었음 좋겠다.
+느껴질진 모르겠지만 처음부터 끝까지 진심이었어.
+이 편지를 쓰면서 몇번을 울었는지 몰라....(3번 울었음)
+편지 마지막에 항상 하는 말이지만, 이것도 진심이니 적을게
+
+1년동안 내 옆에 있어줘서 고맙고 앞으로도 잘 부탁해.
+1주년 축하해. 
+사랑해 바보야
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     8. 1년 간의 이야기 질문
+================================================== -->
+
+<section
+    id="scrap-question"
+    class="screen question-screen">
+
+
+    <h1>
+        1년 간의 이야기
+    </h1>
+
+    <div class="password-box">
+
+        <input
+            type="password"
+            id="scrapPassword"
+            placeholder="비밀번호"
+            autocomplete="off"
+            inputmode="numeric">
+
+        <button onclick="checkScrapPassword()">
+            확인
+        </button>
+
+    </div>
+
+    <div
+        id="scrapPasswordMessage"
+        class="password-message">
+    </div>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     9. 1년 간의 이야기
+================================================== -->
+
+<section
+    id="scrapbook"
+    class="screen">
+
+
+    <div class="scrapbook-title">
+        1년 간의 이야기
+    </div>
+
+
+
+    <!-- 사진 1 -->
+
+    <div class="scrapbook-page active first-page">
+
+
+        <div class="scrap-photo photo-grid-1">
+
+            <img src="images/photo1.jpg" alt="사진 1">
+
+        </div>
+
+
+        <div class="scrap-letter">
+
+            2025.10.26 (D+1) <br>
+            우리가 사귀기 시작한 날이야!! 정말 수학여행 때부터얼마나 설렜는지 몰라. 사실 수학여행 저녁에 하루종일 돌
+            아댕기고 멀미도 심하고 컨디션도 안 좋아서 엄청 피곤했었는데 신기하게 널 보면
+            다 나았었어. 지금은 내성(?)이 생겨서 그런가 낫거나 하진 않지만,,, 너랑 있으면
+            편해서 한시름 놓게돼. 암튼 숙소에서 침대에 누워 피곤해하고 있을 떄 너한테 답장
+            이 오면 바로 낫고 심장이 두근댔어. 어쩌면 작년 여름방학 전부터 너가 마음에 있
+            었을지도 몰라. 9월 말, 학원 밴드에서 친구를 데려오라는 원장님의 말씀에 나도 
+            모르게 네 생각이 났거든. 먼저 누군가를 좋아해본 적은 진짜 처음이라, 원장님의 
+            말씀을 들은 날 이후로 널 좋아하지 않는다고 부정하다가, 운동부에서 널 보면 웃는 
+            날보고 납득했어. 뭐가 그리 좋았었는지 너한테 연락도 못하면서 디엠으로, 머릿속
+            으로도 매일 너 얘기를 하느라 바빴어. 물론 지금도 엄청엄청 좋지만 그 땐 뭐에 
+            씌인 것처럼 너만 보였어. 널 보고 운동, 다이어트, 공부 다 하기 시작했어. 거의
+             너가 날 인간으로 만들어줬다고 해도 과언이 아닐 정도로 인생을 손놓고 있던 날 
+             일으켜줬어. 고마워. 어쨌든 기적같던 10월 26일, 지금 생각해도 심장이 뛰는 저
+             날, 용기내어 고백해줘서 고마워 정환아
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- 사진 2 -->
+
+    <div class="scrapbook-page">
+
+
+        <div class="scrap-photo photo-grid-2">
+
+            <img src="images/photo2.jpg" alt="사진 2">
+            <img src="images/photo3.jpg" alt="사진 3">
+
+        </div>
+
+
+        <div class="scrap-letter">
+
+            <br>
+            2025.11.02 (D+8) <br>
+            이 날은 첫데이트날!! 엄청 어색했었지,, 포토그레이 찍고 보드게임 하러갔었어! 맞나..? 기억도 이제 잘 안나네..ㅎㅎ 둘 다 엄청 어색해서 쭈뼛쭈뼛대던 기억이 나. 사진 찍을 떄 자기 엄청 삐걱대던거 ㅋㅋㅋ 너무 귀여웠어ㅜㅜ 내 기억으론 데이트 3일 전부터 들떠서 옷 정해두고 화장연습하구.. 그랬던 것 같아! 아마 당일날 제대로 잠 못자고 갔었을걸..? 지금 생각하면 엄청 풋풋했다. 그치? 우리의 1년 전,, 지금과는 다른 내가 신기해. 우리 사이도 많이 변한 것 같아. 변하지 않는 사람은 없다는데, 우리 엄청 많이 변하진 말자 ♡
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- 사진 3 -->
+
+    <div class="scrapbook-page">
+
+
+        <div class="scrap-photo photo-grid-1">
+
+            <img src="images/photo4.jpg" alt="사진 4">
+
+        </div>
+
+
+        <div class="scrap-letter">
+
+            
+            2025.11.30 (D+36) <br>
+            이날은 내 생일!! 생일 2일 전에 자기가 귀걸이를 줬을 때 너무 기뻤는데,, 그만큼 리액션을 못했었어ㅜㅜ(집에서 엄청 후회했어ㅜㅜ) 귀걸이를 받은 날 너가 내 생일 당일에 같이 있어주지 못해 미안하다고 계속 말해줬었는데, 실제로는 같이 있어줘서 고마웠어! 둘만 있던 건 아니었지만,, 이 때만 해도 기말고사때문에 잘 못 놀았었어서 내 생일도 시험기간이라 못 만날 줄 았았지만 같이 있을 수 있어서 너무 고맙고 좋았어. 정성가득한 너의 첫 손편지가 그렇게 예쁜 귀걸이보다 좋았어. 너의 진심을 담아낸 편지같아서.. 너가 나랑 꼭 결혼해야 한다고 편지에 적어둔 거 기억나? 진심으로 결혼하자고 적어놨었어. 나중에 와서 그런 말 한적 없다고 무르면 안돼?! 꼭 나랑 결혼해야해 ♡
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- 사진 4 -->
+
+    <div class="scrapbook-page">
+
+
+        <div class="scrap-photo photo-grid-1">
+
+            <img src="images/photo5.jpg" alt="사진 5">
+
+        </div>
+
+
+        <div class="scrap-letter">
+
+            <br>
+            2025.12.06 (D+42) <br>
+            겨울에 기말고사 끝나고 만난 날!! 처음으로 앞머리까고 데이트한 날이었어. 사실,, 이 날 뭐했는지 기억이 잘 안나ㅜㅜ 이 날이 자기가 스플렌더 토큰 가지고 장난친 날일거야! (초딩..) 아직 영상두 가지고 있어서 보는데, 너무 귀여운 거 잇지ㅜ 아 그리고 보드게임 져서 고양이 포즈한 거!! 그거 진짜 초카와이...ㅜㅜ
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- 사진 5 -->
+
+    <div class="scrapbook-page">
+
+
+        <div class="scrap-photo photo-grid-2">
+
+            <img src="images/photo6.jpg" alt="사진 6">
+            <img src="images/photo7.jpg" alt="사진 7">
+
+        </div>
+
+
+        <div class="scrap-letter">
+
+            <br>
+            <br>
+            2025.12.10 (D+46) <br>
+            목대로 학과탐방을 간 날!! 목대 학과 탐방 점심시간에 불쑥 널 찾아갔는데 너가 환영(?)한다는 듯이 반겨줘서 너무 고마웠어. 그리구 빙수먹고 싶다고 했더니 빙수먹으러 가자고 해주고 빙수먹으러 같이 가줘서 너무 고마웠어 ♡
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- 사진 6 -->
+
+    <div class="scrapbook-page">
+
+
+        <div class="scrap-photo photo-grid-2">
+
+           <img src="images/photo8.jpg" alt="사진 8">
+           <img src="images/photo9.jpg" alt="사진 9">
+
+        </div>
+
+
+        <div class="scrap-letter">
+
+            <br>
+            2025.12.14 (D+50) <br>
+            우리의 50일이야!! 이날 내가 시후랑 춤연습하기 전에 장미의 거리로 갔을 때 자기가 성태랑 놀다가 나한테 와서 같이 빙수먹어줬어. 이 빙수 성원이가 준 기프티콘으로 먹은 거라서 고맙다고 사진 보냈었잖아 ㅋㅋ<br> 성태랑 놀다가 나한테 와준게 너무 고마웠어. 이 날 저녁에 준 편지에 적혀있는 것처럼, 그때나 지금이나 오래오래 행복하게 만나고 싶어. 나도 많이 노력할게!!
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- 사진 7 -->
+
+    <div class="scrapbook-page">
+
+
+        <div class="scrap-photo photo-grid-6">
+
+            <img src="images/photo10.jpg" alt="사진 10">
+            <img src="images/photo11.jpg" alt="사진 11">
+            <img src="images/photo12.jpg" alt="사진 12">
+            <img src="images/photo13.jpg" alt="사진 13">
+            <img src="images/photo14.jpg" alt="사진 14">
+            <img src="images/photo15.jpg" alt="사진 15">
+
+        </div>
+
+
+        <div class="scrap-letter">
+
+    
+            2025.12.25 (D+61) <br>
+            크리스마스 데이트야! 나에게도, 너에게도 처음이었던 커플 크리스마스였어서 더 의미있었던 것 같아. 밖이 너무 추워서 힘들었었지만,, 재미있었어!! 자기는 생크림케이크 못 먹는데 내가 먹고싶다해서 생크림케이크 같이 시켜줘서 고마웠어ㅜ 마라탕고 먹고 보드게임카페도 가고 사진도 찍고 카페도 갔었던 걸로 기억해. 올해 크리스마스도 같이 보낼 수 있었으면 좋겠다 ㅎㅎ. 이 날 크리스마스가 끝나며 내년, 내후년의 크리스마스도 같은 사람과 같은 관계로 있었음 좋겠다고 빌었었어. 이루어졌으면 좋겠다. 진짜루..
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- 사진 8 -->
+
+    <div class="scrapbook-page">
+
+
+        <div class="scrap-photo photo-grid-4">
+
+            <img src="images/photo16.jpg" alt="사진 16">
+            <img src="images/photo17.jpg" alt="사진 17">
+            <img src="images/photo18.jpg" alt="사진 18">
+            <img src="images/photo19.jpg" alt="사진 19">
+
+        </div>
+
+
+        <div class="scrap-letter">
+
+            
+            2026.01.21 (D+88) <br>
+            광주 간 날이야. 데이트 전, 광주로 내 병원 가는 거에 같이 갈 수 있냐는 갑작스러운 제안에 쉽게 응해줘서 고마웠어. 당일 잠을 조금밖에 못자서 너무 피곤한 탓에 버스에서 자는데 솔직히 어깨가 낮아서 불편했었어...ㅎ 그래도 너랑 알콩달콩 처음 시외로 간 거라서 엄청 좋았었어. 대기시간도 길었고 스끼야끼는 많이 느끼해서 너가 많이 못 먹었지만,,ㅎ 거의 일상처럼 익숙해진 호르몬검사 과정을 보여주는게 괜찮을 줄 알았는데 막상 실제가 되니까 부끄러웠어ㅜㅜ 이 날 내 기억으론 다음에 꼭 시외데이트 다시 하자고 했던 것 같은데,, 맞나..? 사실 아빠 시간 안되니까 혼자 광주가라는 말을 들었을 때 광주에서 3~4시간 있어야 하니까 좀 무서웠는데, 남친이랑 같이 가도 된다는 아버지 말에, 진짜 갑자기 너한테 같이 갈 수 있냐고 말했는데도 같이 갈 수 있다고 해줘서 너무 고마웠어.
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- 사진 9 -->
+
+    <div class="scrapbook-page">
+
+
+        <div class="scrap-photo photo-grid-1">
+
+           <img src="images/photo20.jpg" alt="사진 20">
+
+        </div>
+
+
+        <div class="scrap-letter">
+
+            <br>
+            <br>
+            2026.01.25 (D+92) <br>
+            겨울방학에 따로 만나서 데이트했던 날이야! 마샤라는 고양이 카페가 있다고 해서 갔는데 고양이가 별로 없어서 아쉬웠던.. 마라탕도 먹구~ 너무너무 추웠는데 너랑 있어서 시간이 빨리 흘러갔었어.
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- 사진 10 -->
+
+    <div class="scrapbook-page">
+
+
+        <div class="scrap-photo photo-grid-4">
+
+           <img src="images/photo21.jpg" alt="사진 21">
+           <img src="images/photo22.jpg" alt="사진 22">
+           <img src="images/photo23.jpg" alt="사진 23">
+           <img src="images/photo24.jpg" alt="사진 24">
+
+        </div>
+
+
+        <div class="scrap-letter">
+
+            
+            2026.02.01 (D+100) <br>
+            우리가 100일 이었을 때야. 이런 스크랩북, 이번에 준 스크랩북을 100일 때도 줬던 거 기억나? 100일 땐 사진을 뽑아서 만들었고 이번엔 노트로는 그림그려서, 코딩으로는 사진을 첨부해서 만든 점에서 차이점이 있지만, 사실상 100일 때도 줬던 선물을 다시 주는 거니까 별로일까봐 많이 걱정했어. 솔직히 스크랩북을 줬을 당시 별로 안 좋아했던 것 같아서 속상했어ㅜ 널 감동시키고 싶었는데 그게 잘 안됐었다랄까..? 나중에 너가 선물받아서 좋았다고 말해줘서 너무 좋았어.<br>
+            100일날 초등학교에서 놀다가 바람이 세서 이리저리 왔다갔다 했지만, 다른 데이트들(좀 더 돈을 쓴,,)이랑 비슷하게 행복했어. 너랑 웃고 떠드는 건 다른 데이트들(좀 더 돈을 쓴)이랑 같았으니까.
+
+        </div>
+
+
+    </div>
+
+
+    <!-- 사진 11 -->
+
+    <div class="scrapbook-page">
+
+
+        <div class="scrap-photo photo-grid-3">
+
+           <img src="images/photo25.jpg" alt="사진 25">
+           <img src="images/photo26.jpg" alt="사진 26">
+           <img src="images/photo27.jpg" alt="사진 27">
+
+        </div>
+
+
+        <div class="scrap-letter">
+
+            
+            2026.04.12 (D+170) <br>
+            당시 2주 뒤가 시험이었어서 시험 준비한다고 같이 도서관 갔던 날이야. 자기가 공부에 집중을 잘 못하는 것같아서 괜히 나오라 했나...하구 미안했었어ㅜㅜ
+
+        </div>
+
+
+    </div>
+
+
+    <!-- 사진 12 -->
+
+    <div class="scrapbook-page">
+
+
+        <div class="scrap-photo photo-grid-6">
+
+           <img src="images/photo28.jpg" alt="사진 28">
+           <img src="images/photo29.jpg" alt="사진 29">
+           <img src="images/photo30.jpg" alt="사진 30">
+           <img src="images/photo31.jpg" alt="사진 31">
+           <img src="images/photo32.jpg" alt="사진 32">
+           <img src="images/photo33.jpg" alt="사진 33">
+
+
+        </div>
+
+
+        <div class="scrap-letter">
+
+            2026.05.13 (D+200) <br>
+            200일 당일에 자기에게 목걸이를 받아서 정말 감동받았어. 받는 순간부터 너무 마음에 들었었는데, 한편으로는 내가 자기에 비해 별 거 못해준 것 같아서 괜히 미안하기도 했어. 200일 당일이 평일이라서 주말에 데이트했엇어. 데이트 당일 내가 만나기로 한 시간보다 훨씬 늦게왔었지,, 정말 미안해. 데이트 당일에 너무 미안해서 무슨 말이라도 해야할 것 같았는데, 괜히 말을 잘못했다가 자기를 더 화나게 만들까봐 쉽게 입을 열지 못했던 것 같아. 그 뒤에 자기가 먼저 분위기 풀어주고 웃어줘서 너무 미안하고 너무 고마웠어. 바다에서 놀 떄, 스카이워크 위에서 무서워하던 것도, 바닷물에 손 담그고 휘적휘적 하던 것도 너어무 귀엽고 사랑스러웠어!! 대반동에서 모퉁이까지 가는 동안 엄청 더웠는데도 짜증 한 번 안내고 계속 장난쳐주고 웃어줘서 고마웠어. 모퉁이 갔다가 남악가서 포토그레이도 찍고, 처음 가보는 마라탕 집도 가보고, 분위기 좋은 카페(커피창고로)도 갔었지! 중간에 여울쌤도 만나고..ㅎ 지금와서 돌아보니까 별 거 아닌 것 같으면서도 하나하나 다 기억에 남는 데이트였던 것 같아!!! 남친과의 첫 200일을 너와 함께 보낼 수 있어서 너무 좋았어. 앞으로도 잘 부탁해 정환아 ♡
+
+        </div>
+
+
+    </div>
+
+
+    <!-- 사진 13 -->
+
+    <div class="scrapbook-page">
+
+
+        <div class="scrap-photo photo-grid-6">
+
+           <img src="images/photo34.jpg" alt="사진 34">
+           <img src="images/photo35.jpg" alt="사진 35">
+           <img src="images/photo36.jpg" alt="사진 36">
+           <img src="images/photo37.jpg" alt="사진 37">
+           <img src="images/photo38.jpg" alt="사진 38">
+           <img src="images/photo39.jpg" alt="사진 39">
+
+        </div>
+
+
+        <div class="scrap-letter">
+
+            
+            2026.06.03 (D+220) <br>
+            이 날 구도심에서 라멘도 먹구 근립역사관 뒤 방공호도 가보고 근립역사관 주변에 버스를 꾸민 상품점도 가고 백룸도 보고 보드게임도 하고 사진도 찍었어! 역대금 뭘 많이 한 데이트...! 방공호도 뜻깊었고 라멘도 맛있었고 백룸도 재미(?)있었지만 보드게임 캐스캐디아!!가 진짜루 재밌었어.
+
+        </div>
+
+
+    </div>
+
+
+    <!-- 사진 14 -->
+
+    <div class="scrapbook-page">
+
+
+        <div class="scrap-photo photo-grid-2">
+
+           <img src="images/photo41.jpg" alt="사진 41">
+           <img src="images/photo43.jpg" alt="사진 43">
+
+        </div>
+
+
+        <div class="scrap-letter">
+
+            <br>
+            2026.07.13 (D+261) <br>
+            학교에서 문화의 날이라고 해서 영화 보여준 날!! 당시 선생님들께서 집에 바로 들어가라고, 순찰돈다고 하셨을 때 들킬까봐 무서웠는데 그래두 같이 있고싶어서 데이트를 계속 하고싶어했었어. 학교에서 나눠준 햄버거를 CGV 근처 편의점 벤치에서 먹고 모퉁이도 가구 포케도 먹었어! 사진두 찍고. 넘 재밌었어 포케는 난생 처음먹어봤는데 너무 맛있었어!! 살짝 샐러드의 상위호환? 이 날 포토그레이가 진짜 잘 안 나와서 슬펐어ㅜㅜ
+
+        </div>
+
+
+    </div>
+
+
+    <!-- 사진 15 -->
+
+    <div class="scrapbook-page">
+
+
+        <div class="scrap-photo photo-grid-1">
+
+           <img src="images/photo44.jpg" alt="사진 44">
+
+        </div>
+
+
+        <div class="scrap-letter">
+
+            <br>
+            2026.07.24 (D+272) <br>
+            자기가 준 깜짝선물이야. 귀걸이!! 진짜 너무 좋았어. 이 날 이후로 꾸미고싶다싶을 때 이 귀걸이를 껴...ㅎㅎ 귀걸이를 잃어버렸던걸 기억하고 있다가 열심히 고르고 돈을 써서 선물 해준 거라는 생각에 너무 고마웠어. 감동...ㅜㅜ 지금 다시 봐도 너무 예뻐. 녹슬지 않게 하려고 씻을 때도 빼고 씻고 진짜 중요할 때만 끼는 중..ㅎ 너무 소중해 
+
+        </div>
+
+
+    </div>
+
+
+    <!-- 사진 16 -->
+
+    <div class="scrapbook-page">
+
+
+        <div class="scrap-photo photo-grid-4">
+
+           <img src="images/photo45.jpg" alt="사진 45">
+           <img src="images/photo46.jpg" alt="사진 46">
+           <img src="images/photo47.jpg" alt="사진 47">
+           <img src="images/photo48.jpg" alt="사진 48">
+
+        </div>
+
+
+        <div class="scrap-letter">
+
+            
+            2026.08.01 (D+280) <br>
+            이 날은 우리 처음 같이 불꽃놀이 본날! 카페에서 만나서 츄러스도 먹고 소금빵도 먹었을 때 모카소금빵 같이 먹고싶었는데 별로라고 했었어서 기억해뒀어 ㅎㅎ(메모메모..) 카페에서 클레이로 캐릭터 만들어서 투표내기 했는데 내 표가 너무 많이 나왔지. 하하. 불꽃놀이 보니전 넘 배고파서 쌀국수(분보후에)도 먹었는데 입에 안 맞는 것 같길래 이것두 기억해줬어.(정환이가 싫어하는 거 : 향 쎈 거, 말차, 쓴 거, 커피류 등) 계속 서있어야했어서 다리아프고 더웠지만 너랑 보는 불꽆놀이가 너무 에뻤어서 다 괜찮아졌었어. 다음에도 또 보자!!
+
+        </div>
+
+
+    </div>
+
+
+    <!-- 사진 17 -->
+
+    <div class="scrapbook-page">
+
+
+        <div class="scrap-photo photo-grid-8">
+
+           <img src="images/photo49.jpg" alt="사진 49">
+           <img src="images/photo50.jpg" alt="사진 50">
+           <img src="images/photo51.jpg" alt="사진 51">
+           <img src="images/photo52.jpg" alt="사진 52">
+           <img src="images/photo53.jpg" alt="사진 53">
+           <img src="images/photo54.jpg" alt="사진 54">
+           <img src="images/photo55.jpg" alt="사진 55">
+           <img src="images/photo56.jpg" alt="사진 56">
+
+
+        </div>
+
+
+        <div class="scrap-letter">
+
+            2026.08.11 (D+290) <br>
+            우리의 제대로 된 첫 시외데이트!! 너무 설렘 이슈로 잠을 잘 못자서 좀 피곤했다는게 아쉽긴 했지만, 너무 재밌는 데이트였어. 복불복데이트 할라했는데 그것두 실패하고 충장로 갔는데 문 연 가게들은 엄청 적고 그랬었어.. 그래도 엄청 즐거웠었어. 목포역에서 기차를 타고 광주까지 가는데 기차를 오랜만에 타본다고 엄청 신나하던 너가 너무 귀여웠어ㅜ 전날 부랴부랴 열심히 만든 팔찌도 나눠꼈는데 너무 커서 아쉬웠구..ㅜ 지하철도 타고 미션도 하고 사진도 찍고(이 날 사진 진짜 잘 나왔어!!) 보드게임도 하고 방탈출도 하고 훠궈도 먹고(당시에 짜증낸 거 너무 미안했어.) 고양이카페도 가고 레이저아레나 가서 현실판 총게임도 해보고 오락실도 가고 궁전제과가서 빵도 먹고(빵 먹으면서 부모님 드릴 거 사가자고 했을 때 의견이 겹쳐서 신기했고 한편으론 속 깊다고 생각했었어.) 진짜 맛있는 가성비 양식집도 가고 가챠도 뽑았어! 마지막에 백화점 가려고 했는데 낸가 시간을 잘못봐서.. 결국 구경만하고 나왔지... 그리고 공차갔다가 역가서 기차타구 목포역에서 해산했었어. 진짜 너무 행복한 데이트였어. 비록 여러 변수들이 있었고 생각한대로 안된 것도 많았지만 너무 재밌었어! 다음에도 이런 데이트 또 하자!! 
+
+        </div>
+
+
+    </div>
+
+
+    <!-- 마지막 사진 -->
+
+    <div class="scrapbook-page last-page">
+
+
+        <div class="scrap-photo photo-grid-6">
+
+           <img src="images/photo57.png" alt="사진 57">
+           <img src="images/photo58.png" alt="사진 58">
+           <img src="images/photo59.png" alt="사진 59">
+           <img src="images/photo60.png" alt="사진 60">
+           <img src="images/photo61.png" alt="사진 61">
+           <img src="images/photo62.png" alt="사진 62">
+
+        </div>
+
+
+        <div class="scrap-letter">
+
+           
+            2026.06.25~2026.10.25 (D+317~364)<br>
+            100일, 200일 때처럼 급하게 했다가 저퀄리티로 주게 될까봐 이번엔 장기프로젝트로 해봤어. 여러번 말하고싶어서 입이 근질근질했는데 꾹 참았다는 사실~ 선물,, 어때....? 마음에 드려나... 생각보다 다 시간이 많이 걸렸어. 적어도 각 이틀 이상..? 별종이 같은 경우는 진짜 2~3달 걸렸고,, 스크랩북도 1~2주 걸렸던 것 같은데. 암튼 많은 시간을 들여 만든 선물들이니만큼 맘에 쏙 들었음 좋겠다. 500일땐 또 뭐하지~
+
+        </div>
+
+    </div>
+
+
+    <div class="scrap-navigation">
+
+        <button
+            class="prev-button"
+            onclick="prevScrap()">
+            이전 페이지
+
+        </button>
+
+        <span
+            id="scrapPageNumber"
+            class="page-number">
+            (1/18)
+        </span>
+
+
+        <button
+            class="next-button"
+            onclick="nextScrap()">
+            다음 페이지
+
+        </button>
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     10. 1년 간의 이야기 NO
+================================================== -->
+
+<section
+    id="scrap-no"
+    class="screen message-screen">
+
+
+    <h1>
+        돌아가시오.
+    </h1>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     11. 별종이 질문
+================================================== -->
+
+<section
+    id="manual-question"
+    class="screen question-screen">
+
+
+    <h1>
+        별종이 안에 있는 글자를<br>
+        보고 싶으십니까?
+    </h1>
+
+
+    <div class="yes-no">
+
+        <button onclick="manualYes()">
+            yes
+        </button>
+
+        <button onclick="manualNo()">
+            no
+        </button>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     12. 별종이 설명서
+================================================== -->
+
+<section
+    id="manual"
+    class="screen">
+
+
+    <div class="manual-title">
+        설명서
+    </div>
+
+
+
+    <!-- 설명 1 -->
+
+    <div class="manual-page active first-page">
+
+
+        <div class="manual-photo starphoto-one">
+
+            <img src="images/starphoto1.jpg" alt="별사진 1">
+
+        </div>
+
+
+        <div class="manual-description">
+
+            별종이를 꾹 눌러 납작하게 만듭니다
+
+        </div>
+
+
+        <button
+            class="arrow arrow-right"
+            onclick="nextManual()">
+            →
+
+        </button>
+
+    </div>
+
+
+
+    <!-- 설명 2 -->
+
+    <div class="manual-page">
+
+
+        <div class="manual-photo starphoto-twe">
+
+            <img src="images/starphoto2.jpg" alt="별사진 2">
+
+        </div>
+
+
+        <div class="manual-description">
+
+            가위로 잘라줍니다
+
+        </div>
+
+
+        <button
+            class="arrow arrow-left"
+            onclick="prevManual()">
+
+            ←
+
+        </button>
+
+
+        <button
+            class="arrow arrow-right"
+            onclick="nextManual()">
+
+            →
+
+        </button>
+
+    </div>
+
+
+
+    <!-- 설명 3 -->
+
+    <div class="manual-page last-page">
+
+
+        <div class="manual-photo starphoto-three">
+
+            <img src="images/starphoto3.jpg" alt="별사진 3">
+
+        </div>
+
+
+        <div class="manual-description">
+
+            그대로 풉니다.
+
+        </div>
+
+
+        <button
+            class="arrow arrow-left"
+            onclick="prevManual()">
+
+            ←
+
+        </button>
+
+
+        <button
+            class="first-button"
+            onclick="backToManualStart()">
+            처음으로
+
+        </button>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     13. 별종이 NO
+================================================== -->
+
+<section
+    id="manual-no"
+    class="screen message-screen">
+
+
+    <h1>
+        돌아가시오.
+    </h1>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     17. !누르지마시오!
+================================================== -->
+
+<section
+    id="dont"
+    class="screen">
+
+    <div class="first-message">
+        누르지말라니께.
+    </div>
+
+    <div
+        id="secondDontMessage"
+        class="second-message">
+
+        또 누르기만 해바.
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+    쿠폰함
+================================================== -->
+
+<!-- 쿠폰함 열기 화면 -->
+
+<section
+    id="coupon-question"
+    class="screen coupon-question">
+
+    <button
+        class="coupon-open"
+        onclick="openCouponList()">
+
+        쿠폰함 열기
+
+    </button>
+
+</section>
+
+
+<!-- 실제 쿠폰 화면 -->
+
+<section
+    id="coupon"
+    class="screen coupon-screen">
+
+    <div class="coupon-list">
+
+        <button class="coupon" onclick="openCouponDetail(0)">
+            <span>데이트 장소 결정권</span>
+            <span class="coupon-used" id="coupon-used-0"></span>
+        </button>
+
+        <button class="coupon" onclick="openCouponDetail(1)">
+            <span>간식 사주기 쿠폰</span>
+            <span class="coupon-used" id="coupon-used-1"></span>
+        </button>
+
+        <button class="coupon" onclick="openCouponDetail(2)">
+            <span>원하는 날짜 데이트 쿠폰</span>
+            <span class="coupon-used" id="coupon-used-2"></span>
+        </button>
+
+        <button class="coupon" onclick="openCouponDetail(3)">
+            <span>삐짐 면제권</span>
+            <span class="coupon-used" id="coupon-used-3"></span>
+        </button>
+
+        <button class="coupon" onclick="openCouponDetail(4)">
+            <span>뭐든 들어주는 소원권</span>
+            <span class="coupon-used" id="coupon-used-4"></span>
+        </button>
+
+        <button class="coupon" onclick="openCouponDetail(5)">
+            <span>먹고 싶은 거 사주기 쿠폰</span>
+            <span class="coupon-used" id="coupon-used-5"></span>
+        </button>
+
+        <button class="coupon" onclick="openCouponDetail(6)">
+            <span>칭찬 10번 해주기 쿠폰</span>
+            <span class="coupon-used" id="coupon-used-6"></span>
+        </button>
+
+        <button class="coupon" onclick="openCouponDetail(7)">
+            <span>매점 사주기 쿠폰</span>
+            <span class="coupon-used" id="coupon-used-7"></span>
+        </button>
+
+        <button class="coupon" onclick="openCouponDetail(8)">
+            <span>메가커피 사주기 쿠폰</span>
+            <span class="coupon-used" id="coupon-used-8"></span>
+        </button>
+
+        <button class="coupon" onclick="openCouponDetail(9)">
+            <span>미쯔 사주기 쿠폰</span>
+            <span class="coupon-used" id="coupon-used-9"></span>
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- 쿠폰 상세 화면 -->
+
+<section
+    id="coupon-detail"
+    class="screen coupon-detail-screen">
+
+    <div
+        id="coupon-card"
+        class="coupon-card"
+        onclick="flipCoupon()">
+
+        <!-- 앞면 -->
+
+        <div class="coupon-face coupon-front">
+
+            <div
+                id="coupon-front-title"
+                class="coupon-detail-title">
+
+                데이트 장소 결정권
+
+            </div>
+
+        </div>
+
+
+        <!-- 뒷면 -->
+
+        <div class="coupon-face coupon-back">
+
+            <div
+                id="coupon-back-description"
+                class="coupon-description">
+            </div>
+
+            <label
+                class="used-check"
+                onclick="event.stopPropagation();">
+
+                <input
+                    type="checkbox"
+                    id="coupon-check"
+                    onclick="event.stopPropagation(); useCoupon();">
+
+                사용했어요
+
+            </label>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     18. 사랑해
+================================================== -->
+
+<section
+    id="love"
+    class="screen">
+
+    <h1>
+        앞으로도 잘 부탁해🖤
+    </h1>
+
+</section>
+
+
+<!-- ==================================================
+     오늘의 운세
+================================================== -->
+
+<section
+    id="fortune"
+    class="screen message-screen">
+
+    <h1>
+        오늘의 운세
+    </h1>
+
+    <button
+        class="fortune-button"
+        onclick="getFortune()">
+
+        운세 확인
+
+    </button>
+
+</section>
+
+<section id="fortuneResult" class="screen message-screen">
+
+    <button
+        class="back-button"
+        onclick="showScreen('fortune')">
+        ←
+    </button>
+
+    <div
+        id="fortuneResultText"
+        class="fortune-text">
+    </div>
+
+    <button
+        id="fortuneAgainButton"
+        class="fortune-button"
+        onclick="getFortune()"
+        style="display: none;">
+        다시한번더
+    </button>
+
+</section>
+
+
+<!-- ==================================================
+     버킷리스트
+================================================== -->
+
+<section
+    
+    id="bucket-list"
+    class="screen">
+
+        <h2>
+        버킷리스트
+        </h2>
+
+
+        <!-- 체크 확인 질문창 -->
+
+        <div
+            id="bucket-question"
+            class="bucket-question"
+            aria-hidden="true">
+
+            <div class="bucket-question-box">
+
+                <div
+                    class="bucket-question-text">
+
+                    체크하시겠습니까?
+
+                </div>
+
+                <div class="yes-no bucket-yes-no">
+
+                    <button
+                        onclick="bucketYes()">
+
+                        yes
+
+                    </button>
+    
+                    <button
+                        onclick="bucketNo()">
+
+                        no
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- 버킷리스트 -->
+
+        <div class="bucket-add-area">
+
+            <input
+                id="bucket-add-input"
+                class="bucket-add-input"
+                type="text"
+                maxlength="80"
+                placeholder="새 버킷리스트 추가">
+
+            <button
+                class="bucket-add-button"
+                onclick="addBucketItem()">
+                추가
+            </button>
+
+        </div>
+
+        <div
+            id="bucket-add-message"
+            class="bucket-add-message">
+        </div>
+
+        <div class="bucket-container">
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>손잡기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>안기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>네컷사진찍기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>스토리에 같이 찍은 사진 올리기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>영화보기</span>
+            </label>
+    
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>썸원하기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>같이 바다가기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>같이 게임하기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>크리스마스 같이 보내기</span>
+            </label>
+    
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>집 데이트 하기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>손편지 받기/주기</span>
+            </label>
+    
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>100일 지나기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>만화카페 가기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>PC방 데이트하기</span>
+            </label>
+    
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>200일 지나기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>집 데려다주기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>같이 셀카찍기</span>
+            </label>
+    
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>300일 지나기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>공포영화보기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>고양이카페가기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>같이 우산쓰기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>인형뽑기하기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>400일 지나기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>오락실가기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>500일 지나기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>서로 어릴 때 사진 보여주기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>600일 지나기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>복불복데이트하기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>시외데이트하기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>700일 지나기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>거울샷찍기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>2주년 지나기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>놀이터 데이트하기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>밤새면서 전화하기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>커플티 맞추기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>800일 지나기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>겨울에 눈싸움하기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>900일 지나기</span>
+            </label>
+    
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>안 헤어지기</span>
+            </label>
+    
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>1000일 지나기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>첫눈 같이 보기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>아쿠아리움가기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>야경 보러가기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>불꽃놀이 보기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>같이 일출보기</span>
+            </label>
+    
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>같이 서울가기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>커플링 맞추기</span>
+            </label>
+    
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>같이 일몰보기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>같이 일본가기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>더블데이트하기</span>
+            </label>
+    
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>완전 큰 눈사람 만들기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>같이 수영장가기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>서로 요리해주기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>찜질방 가기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>생일파티 하기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>틱톡찍기</span>
+            </label>
+    
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>원데이클래스/공방 데이트하기</span>
+            </label>
+
+           <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>아플 때 약이나 죽 사다주기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>옷 바꿔입어보기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>꽃 선물 해주기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>배드민턴치기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>1대1 맞짱까기(스파링)</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>클라이밍하기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>브이로그 찍기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>눈오리 만들기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>방탈출하기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>남이 찍어준 사진 가지기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>각자 닮은 인형 선물해주기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>만원으로만 데이트하기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>맛집투어하기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>서프라이즈해주기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>교환일기 쓰기</span>
+            </label>
+
+            <label class="bucket-item">
+                <input
+                    type="checkbox"
+                    onclick="event.preventDefault(); bucketCheck(this)">
+                <span>서로 상의 안하고 재료 사와서 빙수 만들어먹기</span>
+            </label>
+
+        </div>
+
+    
+</section>
+
+<style>
+
+/* ==================================================
+   버킷리스트
+================================================== */
+
+#bucket-list {
+
+    position: relative;
+
+    width: 100%;
+    height: 100vh;
+    min-height: 0;
+
+    flex-direction: column;
+    align-items: center;
+
+    overflow: hidden;
+
+    background: #000;
+    color: #fff;
+
+    font-family: "Gowun Dodum", sans-serif;
+
+    padding: 35px 20px 30px;
+
+}
+
+#bucket-list,
+#bucket-list .bucket-container {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+#bucket-list::-webkit-scrollbar,
+#bucket-list .bucket-container::-webkit-scrollbar {
+    display: none;
+}
+
+
+#bucket-list h2 {
+
+    flex-shrink: 0;
+
+    margin: 0 0 25px;
+
+    font-size: 30px;
+    font-weight: normal;
+
+    text-align: center;
+
+}
+
+
+#bucket-list .bucket-container {
+
+    width: 100%;
+    max-width: 700px;
+
+    flex: 1;
+    min-height: 0;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding: 0 5px 30px;
+
+    -webkit-overflow-scrolling: touch;
+
+}
+
+
+#bucket-list .bucket-item {
+
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    min-height: 52px;
+
+    padding: 12px 5px;
+
+    color: #fff;
+
+    font-size: 17px;
+
+    cursor: pointer;
+    user-select: none;
+
+}
+
+
+#bucket-list .bucket-item input {
+
+    width: 22px;
+    height: 22px;
+
+    margin: 0 14px 0 0;
+
+    flex-shrink: 0;
+
+    accent-color: #fff;
+
+}
+
+
+#bucket-list .bucket-item input:checked {
+
+    accent-color: #fff;
+
+}
+
+
+#bucket-list .bucket-item.completed span {
+
+    color: #888;
+
+    text-decoration: line-through;
+
+}
+
+
+/* ==================================================
+   체크 질문창
+================================================== */
+
+#bucket-question {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.82);
+
+    z-index: 1000;
+
+}
+
+
+#bucket-question[aria-hidden="false"] {
+
+    display: flex;
+
+}
+
+
+#bucket-question .bucket-question-box {
+
+    width: min(85%, 360px);
+
+    padding: 30px 25px;
+
+    background: #222;
+
+    border: 1px solid #555;
+
+    border-radius: 8px;
+
+    text-align: center;
+
+}
+
+
+#bucket-question .bucket-question-text {
+
+    font-size: 19px;
+
+    line-height: 1.6;
+
+}
+
+
+#bucket-question .bucket-yes-no {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 35px;
+
+    margin-top: 25px;
+
+}
+
+
+#bucket-question .bucket-yes-no button {
+
+    min-width: 60px;
+
+    padding: 8px 10px;
+
+    background: transparent;
+
+    border: none;
+
+    color: #fff;
+
+    font-family: inherit;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+}
+
+
+/* ==================================================
+   모바일
+================================================== */
+
+@media (max-width: 600px) {
+
+    #bucket-list {
+
+        padding: 25px 16px 20px;
+
+    }
+
+
+    #bucket-list h2 {
+
+        margin-bottom: 18px;
+
+        font-size: 28px;
+
+    }
+
+
+    #bucket-list .bucket-item {
+
+        font-size: 16px;
+
+    }
+
+}
+
+</style>
+
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+<script>
+
+/* ==================================================
+   PWA 앱 설치
+================================================== */
+
+let deferredInstallPrompt = null;
+
+window.addEventListener("beforeinstallprompt", function(event) {
+
+    event.preventDefault();
+    deferredInstallPrompt = event;
+
+    const installButton =
+        document.getElementById("install-app");
+
+    if (installButton) {
+        installButton.style.display = "flex";
+    }
+
+});
+
+window.addEventListener("appinstalled", function() {
+
+    deferredInstallPrompt = null;
+
+    const installButton =
+        document.getElementById("install-app");
+
+    if (installButton) {
+        installButton.style.display = "none";
+    }
+
+});
+
+async function installApp() {
+
+    if (!deferredInstallPrompt) {
+        alert("이 기기에서는 자동 설치 창을 바로 열 수 없습니다. 브라우저의 메뉴에서 '홈 화면에 추가' 또는 '앱 설치'를 선택해주세요.");
+        return;
+    }
+
+    deferredInstallPrompt.prompt();
+
+    try {
+        await deferredInstallPrompt.userChoice;
+    } catch (error) {
+        console.error(error);
+    }
+
+    deferredInstallPrompt = null;
+
+}
+
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function() {
+        navigator.serviceWorker.register("service-worker.js")
+            .catch(function(error) {
+                console.error("서비스 워커 등록 실패:", error);
+            });
+    });
+}
+
+
+/* ==================================================
+   스크랩북 좌/우 화살표
+================================================== */
+
+function updateScrap() {
+
+    scrapPages.forEach(function(page, index) {
+        page.classList.toggle("active", index === scrapIndex);
+    });
+
+    const prevButton =
+        document.querySelector(".scrap-navigation .prev-button");
+
+    const nextButton =
+        document.querySelector(".scrap-navigation .next-button");
+
+    if (prevButton) {
+        prevButton.textContent = "<";
+        prevButton.style.visibility =
+            scrapIndex === 0 ? "hidden" : "visible";
+        prevButton.onclick = prevScrap;
+    }
+
+    if (nextButton) {
+
+        if (scrapIndex === scrapPages.length - 1) {
+            nextButton.textContent = "처음으로";
+            nextButton.onclick = backToScrapbookStart;
+            nextButton.classList.add("first-return-button");
+        } else {
+            nextButton.textContent = ">";
+            nextButton.onclick = nextScrap;
+            nextButton.classList.remove("first-return-button");
+        }
+
+        nextButton.style.visibility = "visible";
+    }
+
+    const pageNumber =
+        document.getElementById("scrapPageNumber");
+
+    if (pageNumber) {
+        pageNumber.textContent =
+            "(" + (scrapIndex + 1) + "/" + scrapPages.length + ")";
+    }
+
+}
+
+
+/* ==================================================
+   별종이 처음으로 위치
+================================================== */
+
+function updateManual() {
+
+    manualPages.forEach(function(page, index) {
+        page.classList.toggle("active", index === manualIndex);
+    });
+
+}
+
+
+/* ==================================================
+   버킷리스트: 사용자 추가 + 공유 저장
+================================================== */
+
+function bucketRecordList() {
+
+    return Array.from(
+        document.querySelectorAll("#bucket-list .bucket-item")
+    ).map(function(item) {
+
+        const input = item.querySelector("input");
+        const span = item.querySelector("span");
+
+        return {
+            text: span ? span.textContent.trim() : "",
+            checked: !!(input && input.checked),
+            custom: item.dataset.custom === "true"
+        };
+
+    });
+
+}
+
+function saveBucketList() {
+
+    sharedState.bucketList = bucketRecordList();
+    saveSharedState();
+
+}
+
+function createBucketItem(text, checked, custom) {
+
+    const container =
+        document.querySelector("#bucket-list .bucket-container");
+
+    if (!container || !text) {
+        return null;
+    }
+
+    const label = document.createElement("label");
+    label.className = "bucket-item";
+    label.dataset.custom = custom ? "true" : "false";
+
+    const input = document.createElement("input");
+    input.type = "checkbox";
+    input.checked = !!checked;
+    input.onclick = function(event) {
+        event.preventDefault();
+        bucketCheck(this);
+    };
+
+    const span = document.createElement("span");
+    span.textContent = text;
+
+    label.appendChild(input);
+    label.appendChild(span);
+    container.appendChild(label);
+
+    if (input.checked) {
+        label.classList.add("completed");
+    }
+
+    return label;
+
+}
+
+function loadBucketList() {
+
+    const saved = sharedState.bucketList;
+
+    if (!Array.isArray(saved) || saved.length === 0) {
+        return;
+    }
+
+    const items =
+        document.querySelectorAll("#bucket-list .bucket-item");
+
+    /* 예전 버전의 [true, false, ...] 형식도 호환 */
+    if (saved.every(function(value) {
+        return typeof value === "boolean";
+    })) {
+
+        items.forEach(function(item, index) {
+            const input = item.querySelector("input");
+            if (!input) return;
+
+            input.checked = saved[index] === true;
+            item.classList.toggle("completed", input.checked);
+        });
+
+        return;
+    }
+
+    const staticItems = Array.from(items);
+
+    saved.forEach(function(record) {
+
+        if (!record || typeof record !== "object") {
+            return;
+        }
+
+        const text = String(record.text || "").trim();
+        if (!text) return;
+
+        let existing = staticItems.find(function(item) {
+            const span = item.querySelector("span");
+            return span && span.textContent.trim() === text;
+        });
+
+        if (!existing) {
+            existing = Array.from(
+                document.querySelectorAll("#bucket-list .bucket-item")
+            ).find(function(item) {
+                const span = item.querySelector("span");
+                return span && span.textContent.trim() === text;
+            });
+        }
+
+        if (!existing && record.custom) {
+            existing = createBucketItem(text, !!record.checked, true);
+        }
+
+        if (existing) {
+            const input = existing.querySelector("input");
+            if (input) {
+                input.checked = !!record.checked;
+                existing.classList.toggle("completed", input.checked);
+            }
+        }
+
+    });
+
+}
+
+function addBucketItem() {
+
+    const input = document.getElementById("bucket-add-input");
+    const message = document.getElementById("bucket-add-message");
+
+    if (!input) return;
+
+    const text = input.value.trim();
+
+    if (!text) {
+        if (message) message.textContent = "내용을 입력해주세요.";
+        input.focus();
+        return;
+    }
+
+    const exists = Array.from(
+        document.querySelectorAll("#bucket-list .bucket-item span")
+    ).some(function(span) {
+        return span.textContent.trim() === text;
+    });
+
+    if (exists) {
+        if (message) message.textContent = "이미 있는 버킷리스트예요.";
+        input.focus();
+        return;
+    }
+
+    createBucketItem(text, false, true);
+    input.value = "";
+
+    saveBucketList();
+
+    if (message) message.textContent = "추가되었습니다.";
+    input.focus();
+
+}
+
+
+/* ==================================================
+운세: 하루 1회 + 다시한번더 예외
+================================================== */
+
+const fortuneList = [
+    "오늘의 행운의 숫자는 9입니다.",
+    "오늘의 행운의 숫자는 8입니다.",
+    "오늘의 행운의 숫자는 7입니다.",
+    "오늘의 행운의 숫자는 6입니다.",
+    "오늘의 행운의 숫자는 5입니다.",
+    "오늘의 행운의 숫자는 4입니다.",
+    "오늘의 행운의 숫자는 3입니다.",
+    "오늘의 행운의 숫자는 2입니다.",
+    "오늘의 행운의 숫자는 1입니다.",
+    "오늘은 맛있는 것을 먹으면 좋은 일이 생깁니다.",
+    "누군가 당신을 많이 좋아하고 있습니다.",
+    "오늘은 푹 쉬어야 하는 날",
+    "오늘은 뜻밖의 행운이 찾아오는 날",
+    "오늘은 게임운이 좋은 날",
+    "우연한 선택이 정답일지도?",
+    "오늘은 고민하던 일이 조금씩 풀리는 날",
+    "오늘은 새로운 시작에 좋은 날",
+    "오늘은 운보다 실력이 중요한 날",
+    "다시 한번 더",
+    "오늘은 기억해둘 만한 일이 생기는 날",
+    "오늘은 급하게 결정하지 않는 게 좋은 날",
+    "오늘은 욕심을 조금 내려놓으면 운이 올라가는 날",
+    "오늘은 소원을 하나 빌어보세요",
+    "오늘은 당 충전이 필요한 날",
+    "오늘은 선연락을 많이하면 행운이 찾아오는 날",
+    "오늘은 작은 실수가 웃음으로 바뀌는 날",
+    "오늘은 사진을 많이 남기면 좋은 날",
+    "오늘은 좋은 소식을 듣는 날",
+    "오늘은 새로운 추억을 만들기 좋은 날",
+    "오늘은 평소보다 운이 좋은 날",
+    "오늘은 좋은 소식을 듣는 날",
+    "오늘은 운이 안 좋은 날(조심하시오)",
+    "오늘은 하고싶었던 일을 시작하기 좋은 날",
+    "오늘은 예상하지 못한 일이 생기는 날",
+    "오늘은 작은 선물이 행운을 가져오는 날",
+    "오늘은 고민하던 일이 조금씩 풀리는 날",
+    "오늘은 긍정적으로 생각하면 행운이 들어오는 날"
+];
+
+
+function getTodayKey() {
+    const now = new Date();
+
+    return now.getFullYear() + "-" +
+        String(now.getMonth() + 1).padStart(2, "0") + "-" +
+        String(now.getDate()).padStart(2, "0");
+}
+
+
+function getFortuneStorage() {
+
+    try {
+
+        const raw =
+            localStorage.getItem("anniversaryFortune");
+
+        return raw ? JSON.parse(raw) : null;
+
+    } catch (error) {
+
+        return null;
+
+    }
+
+}
+
+
+function saveFortuneStorage(data) {
+
+    localStorage.setItem(
+        "anniversaryFortune",
+        JSON.stringify(data)
+    );
+
+}
+
+
+function renderFortune() {
+
+    const textBox =
+        document.getElementById("fortuneText");
+
+    const resultText =
+        document.getElementById("fortuneResultText");
+
+    const button =
+        document.querySelector(
+            "#fortune .fortune-button"
+        );
+
+    const againButton =
+        document.getElementById(
+            "fortuneAgainButton"
+        );
+
+
+    const today = getTodayKey();
+
+    const data = getFortuneStorage();
+
+
+    /*
+     * 오늘 아직 운세를 뽑지 않은 경우
+     */
+
+    if (!data || data.date !== today) {
+
+        if (textBox) {
+            textBox.textContent = "";
+        }
+
+        if (resultText) {
+            resultText.textContent = "";
+        }
+
+        if (button) {
+
+            button.textContent = "운세 확인";
+
+            button.disabled = false;
+
+            button.style.opacity = "1";
+
+            button.style.pointerEvents = "auto";
+
+            button.style.display = "block";
+
+        }
+
+        if (againButton) {
+
+            againButton.style.display = "none";
+
+        }
+
+        return;
+
+    }
+
+
+    /*
+     * '다시 한번 더'가 나온 경우
+     */
+
+    if (
+        data.fortune === "다시 한번 더" &&
+        !data.extraUsed
+    ) {
+
+        if (resultText) {
+
+            resultText.textContent = "";
+
+        }
+
+        if (againButton) {
+
+            againButton.textContent = "다시한번더";
+
+            againButton.disabled = false;
+
+            againButton.style.opacity = "1";
+
+            againButton.style.pointerEvents = "auto";
+
+            againButton.style.display = "block";
+
+        }
+
+        return;
+
+    }
+
+
+    /*
+     * 일반 운세 결과
+     */
+
+    if (resultText) {
+
+        resultText.textContent =
+            data.fortune +
+            "입니다.";
+
+    }
+
+    if (againButton) {
+
+        againButton.style.display = "none";
+
+    }
+
+    if (button) {
+
+        button.style.display = "none";
+
+    }
+
+}
+
+
+function openFortune() {
+
+    showScreen("fortune");
+
+    const button = document.querySelector("#fortune .fortune-button");
+
+    if (!button) {
+        return;
+    }
+
+    const today = getTodayKey();
+    const data = getFortuneStorage();
+
+    // 오늘 뽑은 기록이 있고, "다시 한번 더" 대기 상태가 아니면 = 오늘 결과가 확정된 상태
+    const alreadyResolved =
+        data &&
+        data.date === today &&
+        !(data.fortune === "다시 한번 더" && !data.extraUsed);
+
+    button.textContent = alreadyResolved ? "운세 결과 확인" : "운세 확인";
+    button.disabled = false;
+    button.style.opacity = "1";
+    button.style.pointerEvents = "auto";
+    button.style.display = "block";
+
+}
+
+
+function getFortune() {
+
+    const today = getTodayKey();
+    let data = getFortuneStorage();
+
+    // 오늘 이미 운세를 뽑았다면
+    if (data && data.date === today) {
+
+        // "다시 한번 더"가 나온 경우
+        if (
+            data.fortune === "다시 한번 더" &&
+            !data.extraUsed
+        ) {
+
+            const candidates = fortuneList.filter(function(value) {
+                return value !== "다시 한번 더";
+            });
+
+            const fortune =
+                candidates[
+                    Math.floor(Math.random() * candidates.length)
+                ];
+
+            data.fortune = fortune;
+            data.extraUsed = true;
+
+            saveFortuneStorage(data);
+
+            const resultText =
+                document.getElementById("fortuneResultText");
+
+            if (resultText) {
+                resultText.textContent =
+                    fortune + "입니다.";
+            }
+
+            const againButton =
+                document.getElementById("fortuneAgainButton");
+
+            if (againButton) {
+                againButton.style.display = "none";
+            }
+
+            showScreen("fortuneResult");
+
+            return;
+        }
+
+        // 이미 오늘 운세를 확인했다면
+        showScreen("fortuneResult");
+        renderFortune();
+
+        return;
+    }
+
+
+    // 오늘 처음 운세를 뽑는 경우
+    const fortune =
+        fortuneList[
+            Math.floor(Math.random() * fortuneList.length)
+        ];
+
+    data = {
+        date: today,
+        fortune: fortune,
+        extraUsed: false
+    };
+
+    saveFortuneStorage(data);
+
+
+    const resultText =
+        document.getElementById("fortuneResultText");
+
+    const againButton =
+        document.getElementById("fortuneAgainButton");
+
+
+    // "다시 한번 더"가 뽑힌 경우
+    if (fortune === "다시 한번 더") {
+
+        if (resultText) {
+            resultText.textContent = "";
+        }
+
+        if (againButton) {
+            againButton.textContent = "다시한번더";
+            againButton.style.display = "block";
+            againButton.disabled = false;
+            againButton.style.pointerEvents = "auto";
+        }
+
+    }
+
+    // 일반 운세
+    else {
+
+        if (resultText) {
+            resultText.textContent =
+                fortune + "입니다.";
+        }
+
+        if (againButton) {
+            againButton.style.display = "none";
+        }
+
+    }
+
+
+    // 결과 화면으로 이동
+    showScreen("fortuneResult");
+
+    document.getElementById("fortuneResult").classList.add("active");
+
+}
+
+window.addEventListener("storage", function(event) {
+
+    if (event.key === "anniversaryFortune") {
+
+        renderFortune();
+
+    }
+
+});
+
+
+/* 사용자 입력으로 추가한 버킷리스트도 새로고침 후 복원 */
+document.addEventListener("DOMContentLoaded", function() {
+    loadBucketList();
+    renderFortune();
+
+    const bucketInput = document.getElementById("bucket-add-input");
+    if (bucketInput) {
+        bucketInput.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                addBucketItem();
+            }
+        });
+    }
+});
+
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<script>
+
+/* ==================================================
+   공유 저장소 설정 (Firebase Realtime Database)
+   --------------------------------------------------
+   1) https://console.firebase.google.com 접속 → 구글 계정으로 로그인
+   2) "프로젝트 추가" → 이름 입력 → 만들기 (애널리틱스는 꺼도 됨)
+   3) 왼쪽 메뉴 "빌드" → "Realtime Database" → "데이터베이스 만들기"
+      → 위치 아무거나 선택 → "테스트 모드로 시작" 선택
+   4) 데이터베이스가 만들어지면 "규칙(Rules)" 탭으로 이동해서
+      아래처럼 바꾸고 "게시" 누르기 (안 하면 30일 뒤 막힘)
+        {
+          "rules": {
+            ".read": true,
+            ".write": true
+          }
+        }
+   5) 프로젝트 개요 옆 </> (웹 앱 추가) 아이콘 클릭 → 앱 닉네임 아무거나
+      → "앱 등록" → 화면에 나오는 firebaseConfig 객체를 통째로 복사해서
+      아래 firebaseConfig 자리에 붙여넣기
+   이 설정을 채우면 나와 남친이 각자 열어도 쿠폰/버킷리스트 상태가
+   서로 똑같이 보여요. (안 채우면 예전처럼 각자 기기에만 저장돼요)
+================================================== */
+
+const firebaseConfig = {
+    apiKey: "AIzaSyABjTmBRCBqziOQh14UFuZudrU5EBdqv4s",
+    authDomain: "firstanniversary2.firebaseapp.com",
+    databaseURL: "https://firstanniversary2-default-rtdb.firebaseio.com",
+    projectId: "firstanniversary2",
+    storageBucket: "firstanniversary2.firebasestorage.app",
+    messagingSenderId: "729838335118",
+    appId: "1:729838335118:web:2ed903adb6d5293ad485df"
+};
+
+let sharedState = {
+    usedCoupons: [],
+    bucketList: []
+};
+
+let sharedRef = null;
+
+function firebaseConfigured() {
+
+    return (
+        firebaseConfig.apiKey.indexOf("여기에") === -1 &&
+        firebaseConfig.databaseURL.indexOf("여기에") === -1
+    );
+
+}
+
+if (firebaseConfigured()) {
+
+    try {
+
+        firebase.initializeApp(firebaseConfig);
+        sharedRef = firebase.database().ref("sharedState");
+
+    } catch (error) {
+
+        console.error("Firebase 초기화 실패:", error);
+        sharedRef = null;
+
+    }
+
+}
+
+function loadSharedState() {
+
+    return new Promise(function(resolve) {
+
+        if (!sharedRef) {
+
+            loadFromLocalStorage();
+            resolve();
+            return;
+
+        }
+
+        sharedRef.once("value")
+            .then(function(snapshot) {
+
+                const data = snapshot.val();
+
+                if (data) {
+
+                    sharedState.usedCoupons =
+                        Array.isArray(data.usedCoupons) ? data.usedCoupons : [];
+
+                    sharedState.bucketList =
+                        Array.isArray(data.bucketList) ? data.bucketList : [];
+
+                } else {
+
+                    loadFromLocalStorage();
+
+                }
+
+                resolve();
+
+            })
+            .catch(function(error) {
+
+                console.error("공유 저장소 불러오기 실패, 이 기기 저장값 사용:", error);
+                loadFromLocalStorage();
+                resolve();
+
+            });
+
+    });
+
+}
+
+function loadFromLocalStorage() {
+
+    try {
+
+        const savedCoupons = localStorage.getItem("usedCoupons");
+        sharedState.usedCoupons = savedCoupons ? JSON.parse(savedCoupons) : [];
+
+    } catch (error) {
+
+        sharedState.usedCoupons = [];
+
+    }
+
+    try {
+
+        const savedBucket = localStorage.getItem("anniversaryBucketList");
+        sharedState.bucketList = savedBucket ? JSON.parse(savedBucket) : [];
+
+    } catch (error) {
+
+        sharedState.bucketList = [];
+
+    }
+
+}
+
+function saveSharedState() {
+
+    localStorage.setItem("usedCoupons", JSON.stringify(sharedState.usedCoupons));
+    localStorage.setItem("anniversaryBucketList", JSON.stringify(sharedState.bucketList));
+
+    if (!sharedRef) {
+        return;
+    }
+
+    sharedRef.set(sharedState)
+        .catch(function(error) {
+
+            console.error("공유 저장소 저장 실패:", error);
+
+        });
+
+}
+
+/* ==================================================
+   버킷리스트
+   ※ 이 부분은 중복 선언 없이 하나만 사용
+================================================== */
+
+let selectedBucketCheckbox = null;
+
+
+/* ==================================================
+   버킷리스트 저장
+================================================== */
+
+function saveBucketList() {
+
+    const items =
+        document.querySelectorAll(
+            "#bucket-list .bucket-item input"
+        );
+
+
+    const checked = [];
+
+
+    items.forEach(function(input, index) {
+
+        checked[index] = input.checked;
+
+    });
+
+
+    sharedState.bucketList = checked;
+    saveSharedState();
+
+}
+
+
+/* ==================================================
+   버킷리스트 불러오기
+================================================== */
+
+function loadBucketList() {
+
+    const checked = sharedState.bucketList;
+
+
+    if (!checked || checked.length === 0) {
+
+        return;
+
+    }
+
+
+    const items =
+        document.querySelectorAll(
+            "#bucket-list .bucket-item input"
+        );
+
+
+    items.forEach(function(input, index) {
+
+        input.checked =
+            checked[index] === true;
+
+
+        const item =
+            input.closest(".bucket-item");
+
+
+        if (item) {
+
+            item.classList.toggle(
+                "completed",
+                input.checked
+            );
+
+        }
+
+    });
+
+}
+
+
+/* ==================================================
+   버킷리스트 열기
+================================================== */
+
+function openBucketList() {
+
+    closeBucketQuestion();
+
+    loadBucketList();
+
+    showScreen("bucket-list");
+
+}
+
+
+/* ==================================================
+   체크박스를 눌렀을 때
+================================================== */
+
+function bucketCheck(input) {
+
+    if (!input) {
+
+        return;
+
+    }
+
+
+    selectedBucketCheckbox = input;
+
+
+    const question =
+        document.getElementById(
+            "bucket-question"
+        );
+
+
+    if (!question) {
+
+        return;
+
+    }
+
+
+    const questionText =
+        question.querySelector(
+            ".bucket-question-text"
+        );
+
+
+    if (input.checked) {
+
+        questionText.textContent =
+            "체크하시겠습니까?";
+
+    } else {
+
+        questionText.textContent =
+            "체크를 삭제하시겠습니까?";
+
+    }
+
+
+    question.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+}
+
+
+/* ==================================================
+   YES
+================================================== */
+
+function bucketYes() {
+
+    if (!selectedBucketCheckbox) {
+
+        closeBucketQuestion();
+
+        return;
+
+    }
+
+
+    const input =
+        selectedBucketCheckbox;
+
+
+    const item =
+        input.closest(".bucket-item");
+
+
+    /*
+       현재 체크되어 있으면
+       → 체크 해제
+    */
+
+    if (input.checked) {
+
+        input.checked = false;
+
+
+        if (item) {
+
+            item.classList.remove(
+                "completed"
+            );
+
+        }
+
+    }
+
+
+    /*
+       현재 체크되어 있지 않으면
+       → 체크
+    */
+
+    else {
+
+        input.checked = true;
+
+
+        if (item) {
+
+            item.classList.add(
+                "completed"
+            );
+
+        }
+
+    }
+
+
+    saveBucketList();
+
+    closeBucketQuestion();
+
+}
+
+
+/* ==================================================
+   NO
+================================================== */
+
+function bucketNo() {
+
+    /*
+       아무것도 변경하지 않음
+    */
+
+    closeBucketQuestion();
+
+}
+
+
+/* ==================================================
+   질문창 닫기
+================================================== */
+
+function closeBucketQuestion() {
+
+    const question =
+        document.getElementById(
+            "bucket-question"
+        );
+
+
+    if (question) {
+
+        question.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+    }
+
+
+    selectedBucketCheckbox = null;
+
+}
+
+
+/* ==================================================
+   처음 로딩할 때 저장된 버킷리스트 불러오기
+================================================== */
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    updateCouponList();
+
+    loadBucketList();
+
+    showScreen("intro");
+
+});
+
+
+/* ==================================================
+   현재 화면
+================================================== */
+
+let currentScreen = "intro";
+
+
+/* ==================================================
+   화면 전환
+================================================== */
+
+function showScreen(id) {
+
+    document.querySelectorAll(".screen").forEach(
+        function(screen) {
+
+            screen.classList.remove("active");
+
+        }
+    );
+
+
+    const target =
+        document.getElementById(id);
+
+
+    if (!target) {
+
+        return;
+
+    }
+
+
+    target.classList.add("active");
+
+
+    currentScreen = id;
+
+
+    /*
+       버킷리스트가 아닌 화면으로 이동하면
+       질문창을 자동으로 닫음
+    */
+
+    if (id !== "bucket-list") {
+
+        closeBucketQuestion();
+
+    }
+
+
+    /*
+       첫 화면에서는 뒤로가기 숨김
+    */
+
+    const backButton =
+        document.querySelector(
+            ".back-button"
+        );
+
+
+    if (backButton) {
+
+        if (id === "intro") {
+
+            backButton.style.display = "none";
+
+        } else {
+
+            backButton.style.display = "flex";
+
+        }
+
+    }
+
+
+    /*
+       비밀번호 화면
+    */
+
+    const passwordIds = {
+
+        "diary-question":
+            "diaryPassword",
+
+        "scrap-question":
+            "scrapPassword",
+
+        "manual-question":
+            "manualPassword"
+
+    };
+
+
+    const passwordId =
+        passwordIds[id];
+
+
+    if (passwordId) {
+
+        const passwordInput =
+            document.getElementById(
+                passwordId
+            );
+
+
+        if (passwordInput) {
+
+            passwordInput.value = "";
+
+
+            setTimeout(
+                function() {
+
+                    passwordInput.focus();
+
+                },
+                100
+            );
+
+        }
+
+    }
+
+}
+
+
+/* ==================================================
+   뒤로가기
+================================================== */
+
+function goBack() {
+
+    if (currentScreen === "intro") {
+
+        return;
+
+    }
+
+
+    if (currentScreen === "firework") {
+
+        showScreen("intro");
+
+        return;
+
+    }
+
+
+    if (currentScreen === "menu") {
+
+        showScreen("firework");
+
+        return;
+
+    }
+
+
+    if (currentScreen === "diary-question") {
+
+        showScreen("menu");
+
+        return;
+
+    }
+
+
+    if (currentScreen === "diary-no") {
+
+        showScreen("diary-question");
+
+        return;
+
+    }
+
+
+    if (currentScreen === "diary") {
+
+        showScreen("menu");
+
+        return;
+
+    }
+
+
+    if (currentScreen === "scrap-question") {
+
+        showScreen("menu");
+
+        return;
+
+    }
+
+
+    if (currentScreen === "scrapbook") {
+
+        showScreen("menu");
+
+        return;
+
+    }
+
+
+    if (currentScreen === "scrap-no") {
+
+        showScreen("scrap-question");
+
+        return;
+
+    }
+
+
+    if (currentScreen === "bucket-list") {
+
+        closeBucketQuestion();
+
+        showScreen("menu");
+
+        return;
+
+    }
+
+
+    if (currentScreen === "manual-question") {
+
+        showScreen("menu");
+
+        return;
+
+    }
+
+
+    if (currentScreen === "manual") {
+
+        showScreen("menu");
+
+        return;
+
+    }
+
+
+    if (currentScreen === "manual-no") {
+
+        showScreen("manual-question");
+
+        return;
+
+    }
+if (currentScreen === "dont") {
+
+        showScreen("menu");
+
+        return;
+
+    }
+
+
+    if (currentScreen === "love") {
+
+        showScreen("menu");
+
+        return;
+
+    }
+
+
+    if (currentScreen === "fortuneResult") {
+
+        showScreen("menu");
+
+        return;
+
+    }
+
+
+    if (currentScreen === "fortune") {
+
+        showScreen("menu");
+
+        return;
+
+    }
+
+
+    if (currentScreen === "coupon-question") {
+
+        showScreen("menu");
+
+        return;
+
+    }
+
+
+    if (currentScreen === "coupon-detail") {
+
+        showScreen("coupon");
+
+        return;
+
+    }
+
+
+    if (currentScreen === "coupon") {
+
+        showScreen("menu");
+
+        return;
+
+    }
+
+}
+
+
+/* ==================================================
+   첫 화면 → 폭죽
+================================================== */
+
+document.getElementById("intro").addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target.closest(".back-button")
+        ) {
+
+            return;
+
+        }
+
+
+        document.fonts
+            .load('45px "Gowun Dodum"')
+            .then(function() {
+
+                showScreen("firework");
+
+                createFireworks();
+
+            });
+
+    }
+);
+
+
+/* ==================================================
+   폭죽 → 메뉴
+================================================== */
+
+document.getElementById("firework").addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target.closest(".back-button")
+        ) {
+
+            return;
+
+        }
+
+
+        showScreen("menu");
+
+    }
+);
+
+
+/* ==================================================
+   폭죽 만들기
+================================================== */
+
+function createFireworks() {
+
+    const screen =
+        document.getElementById(
+            "firework"
+        );
+
+
+    const colors = [
+
+        "#ffffff",
+        "#ff8fab",
+        "#ffd166",
+        "#8ecae6",
+        "#cdb4db"
+
+    ];
+
+
+    for (
+        let burst = 0;
+        burst < 6;
+        burst++
+    ) {
+
+        setTimeout(
+            function() {
+
+                const x =
+                    Math.random()
+                    * window.innerWidth
+                    * 0.7
+                    + window.innerWidth * 0.15;
+
+
+                const y =
+                    Math.random()
+                    * window.innerHeight
+                    * 0.55
+                    + window.innerHeight * 0.15;
+
+
+                for (
+                    let i = 0;
+                    i < 35;
+                    i++
+                ) {
+
+                    const particle =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    particle.className =
+                        "particle";
+
+
+                    particle.style.left =
+                        x + "px";
+
+
+                    particle.style.top =
+                        y + "px";
+
+
+                    particle.style.background =
+                        colors[
+                            Math.floor(
+                                Math.random()
+                                * colors.length
+                            )
+                        ];
+
+
+                    const angle =
+                        Math.random()
+                        * Math.PI
+                        * 2;
+
+
+                    const distance =
+                        Math.random()
+                        * 130
+                        + 40;
+
+
+                    const endX =
+                        Math.cos(angle)
+                        * distance;
+
+
+                    const endY =
+                        Math.sin(angle)
+                        * distance;
+
+
+                    screen.appendChild(
+                        particle
+                    );
+
+
+                    particle.animate(
+
+                        [
+                            {
+                                transform:
+                                    "translate(-50%, -50%) scale(1)",
+                                opacity: 1
+                            },
+
+                            {
+                                transform:
+                                    `translate(
+                                        calc(-50% + ${endX}px),
+                                        calc(-50% + ${endY}px)
+                                    ) scale(0)`,
+                                opacity: 0
+                            }
+
+                        ],
+
+                        {
+                            duration: 1200,
+                            easing: "ease-out"
+                        }
+
+                    );
+
+
+                    setTimeout(
+                        function() {
+
+                            particle.remove();
+
+                        },
+                        1200
+                    );
+
+                }
+
+            },
+            burst * 500
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+   일기
+================================================== */
+
+function openDiaryQuestion() {
+
+    showScreen("diary-question");
+
+}
+
+
+function checkDiaryPassword() {
+
+    const password =
+        document.getElementById(
+            "diaryPassword"
+        ).value;
+
+
+    if (password === "20261026") {
+
+        showScreen("diary");
+
+    } else {
+
+        document.getElementById(
+            "diaryPasswordMessage"
+        ).textContent =
+            "비밀번호가 틀렸습니다.";
+
+    }
+
+}
+
+
+function diaryNo() {
+
+    showScreen("diary-no");
+
+}
+
+
+/* 일기 제목 화면 터치 → 실제 일기 */
+
+document.getElementById("diary-no").addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target.closest(".back-button")
+        ) {
+
+            return;
+
+        }
+
+
+        showScreen("diary");
+
+    }
+);
+
+
+/* ==================================================
+   1년 간의 이야기
+================================================== */
+
+function openScrapQuestion() {
+
+    showScreen("scrap-question");
+
+}
+
+
+function checkScrapPassword() {
+
+    const password =
+        document.getElementById(
+            "scrapPassword"
+        ).value;
+
+
+    if (password === "10181130") {
+
+        scrapIndex = 0;
+
+        updateScrap();
+
+        showScreen("scrapbook");
+
+    } else {
+
+        document.getElementById(
+            "scrapPasswordMessage"
+        ).textContent =
+            "비밀번호가 틀렸습니다.";
+
+    }
+
+}
+
+
+function scrapNo() {
+
+    showScreen("scrap-no");
+
+}
+
+
+function setScrapPhotoGrid(photo, count) {
+
+    [1, 2, 3, 4, 6, 8].forEach(
+        function(gridCount) {
+
+            photo.classList.remove(
+                "photo-grid-" + gridCount
+            );
+
+        }
+    );
+
+    photo.classList.add(
+        "photo-grid-" + count
+    );
+
+}
+
+
+/* 지정한 기록은 사진·편지, 또는 사진 묶음으로 나눕니다. */
+function splitScrapbookPages() {
+
+    const splitPageNumbers = [1, 3, 7, 8, 10, 12, 13, 16, 17, 18];
+    const photoSplitPageNumbers = [12, 13, 17, 18];
+
+    Array.from(
+        document.querySelectorAll(
+            ".scrapbook-page"
+        )
+    ).forEach(
+        function(page, index) {
+
+            const originalPageNumber = index + 1;
+
+            page.dataset.originalPage = originalPageNumber;
+
+            if (
+                !splitPageNumbers.includes(
+                    originalPageNumber
+                )
+            ) {
+
+                page.dataset.scrapLabel =
+                    originalPageNumber + " · 기록";
+
+                return;
+
+            }
+
+            const photo =
+                page.querySelector(
+                    ".scrap-photo"
+                );
+
+            const letter =
+                page.querySelector(
+                    ".scrap-letter"
+                );
+
+            if (!photo || !letter) {
+                return;
+            }
+
+            page.dataset.scrapLabel =
+                originalPageNumber + "-1 사진";
+
+            page.classList.add(
+                "scrap-photo-page"
+            );
+
+            page.classList.remove(
+                "last-page"
+            );
+
+            let insertAfter = page;
+            let letterPartNumber = 2;
+
+            if (
+                photoSplitPageNumbers.includes(
+                    originalPageNumber
+                )
+            ) {
+
+                const images = Array.from(
+                    photo.querySelectorAll("img")
+                );
+
+                const remainingImages = images.slice(4);
+
+                if (remainingImages.length > 0) {
+
+                    setScrapPhotoGrid(photo, 4);
+
+                    const nextPhoto =
+                        photo.cloneNode(false);
+
+                    setScrapPhotoGrid(
+                        nextPhoto,
+                        remainingImages.length
+                    );
+
+                    remainingImages.forEach(
+                        function(image) {
+
+                            nextPhoto.appendChild(image);
+
+                        }
+                    );
+
+                    const nextPhotoPage =
+                        document.createElement("div");
+
+                    nextPhotoPage.className =
+                        "scrapbook-page scrap-photo-page";
+
+                    nextPhotoPage.dataset.originalPage =
+                        originalPageNumber;
+
+                    nextPhotoPage.dataset.scrapLabel =
+                        originalPageNumber + "-2 사진";
+
+                    nextPhotoPage.appendChild(nextPhoto);
+
+                    page.insertAdjacentElement(
+                        "afterend",
+                        nextPhotoPage
+                    );
+
+                    insertAfter = nextPhotoPage;
+                    letterPartNumber = 3;
+
+                }
+
+            }
+
+            const letterPage =
+                document.createElement("div");
+
+            letterPage.className =
+                "scrapbook-page scrap-letter-page";
+
+            letterPage.dataset.originalPage =
+                originalPageNumber;
+
+            letterPage.dataset.scrapLabel =
+                originalPageNumber
+                + "-"
+                + letterPartNumber
+                + " 편지";
+
+            letterPage.appendChild(letter);
+
+            insertAfter.insertAdjacentElement(
+                "afterend",
+                letterPage
+            );
+
+        }
+    );
+
+}
+
+
+splitScrapbookPages();
+
+
+const scrapPages =
+    document.querySelectorAll(
+        ".scrapbook-page"
+    );
+
+
+let scrapIndex = 0;
+
+
+function updateScrap() {
+
+    scrapPages.forEach(
+        function(page, index) {
+
+            page.classList.remove(
+                "active"
+            );
+
+
+            if (index === scrapIndex) {
+
+                page.classList.add(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+
+    const prevButton =
+        document.querySelector(
+            ".scrap-navigation .prev-button"
+        );
+
+
+    const nextButton =
+        document.querySelector(
+            ".scrap-navigation .next-button"
+        );
+
+
+    if (prevButton) {
+
+        prevButton.textContent = "<";
+
+        prevButton.style.visibility =
+            scrapIndex === 0
+                ? "hidden"
+                : "visible";
+
+    }
+
+
+    if (nextButton) {
+
+        if (
+            scrapIndex ===
+            scrapPages.length - 1
+        ) {
+
+            nextButton.style.visibility =
+                "hidden";
+
+        } else {
+
+            nextButton.textContent =
+                ">";
+
+            nextButton.onclick =
+                nextScrap;
+
+            nextButton.style.visibility =
+                "visible";
+
+        }
+
+    }
+
+
+    const pageNumber =
+        document.getElementById(
+            "scrapPageNumber"
+        );
+
+
+    if (pageNumber) {
+
+        const activePage =
+            scrapPages[scrapIndex];
+
+        const label =
+            activePage.dataset.scrapLabel ||
+            (scrapIndex + 1) + " · 기록";
+
+        pageNumber.textContent =
+            label
+            + "  ("
+            + (scrapIndex + 1)
+            + "/"
+            + scrapPages.length
+            + ")";
+
+    }
+
+}
+
+
+function nextScrap() {
+
+    if (
+        scrapIndex <
+        scrapPages.length - 1
+    ) {
+
+        scrapIndex++;
+
+        updateScrap();
+
+    }
+
+}
+
+
+function prevScrap() {
+
+    if (scrapIndex > 0) {
+
+        scrapIndex--;
+
+        updateScrap();
+
+    }
+
+}
+
+
+updateScrap();
+
+
+/* ==================================================
+   별종이 설명서
+================================================== */
+
+function openManualQuestion() {
+
+    showScreen("manual-question");
+
+}
+
+
+function manualYes() {
+
+    manualIndex = 0;
+
+    updateManual();
+
+    showScreen("manual");
+
+}
+
+
+function manualNo() {
+
+    showScreen("manual-no");
+
+}
+
+
+let manualIndex = 0;
+
+
+const manualPages =
+    document.querySelectorAll(
+        ".manual-page"
+    );
+
+
+function updateManual() {
+
+    manualPages.forEach(
+        function(page, index) {
+
+            page.classList.toggle(
+                "active",
+                index === manualIndex
+            );
+
+        }
+    );
+
+}
+
+
+function nextManual() {
+
+    if (
+        manualIndex <
+        manualPages.length - 1
+    ) {
+
+        manualIndex++;
+
+        updateManual();
+
+    }
+
+}
+
+
+function prevManual() {
+
+    if (manualIndex > 0) {
+
+        manualIndex--;
+
+        updateManual();
+
+    }
+
+}
+
+
+/* ==================================================
+   ! 누르지마시오!
+================================================== */
+
+function openDont() {
+
+    showScreen("dont");
+
+
+    const secondMessage =
+        document.getElementById(
+            "secondDontMessage"
+        );
+
+
+    if (!secondMessage) {
+
+        return;
+
+    }
+
+
+    secondMessage.classList.remove(
+        "show"
+    );
+
+
+    setTimeout(
+        function() {
+
+            secondMessage.classList.add(
+                "show"
+            );
+
+        },
+        200
+    );
+
+}
+
+
+/* ==================================================
+   ! 누르지마시오! → 사랑해
+================================================== */
+
+document.getElementById("dont").addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target.closest(".back-button")
+        ) {
+
+            return;
+
+        }
+
+
+        showScreen("love");
+
+        createLoveFireworks();
+
+    }
+);
+
+
+/* ==================================================
+   사랑해 폭죽
+================================================== */
+
+function createLoveFireworks() {
+
+    const screen =
+        document.getElementById(
+            "love"
+        );
+
+
+    const colors = [
+
+        "#ffffff",
+        "#ff8fab",
+        "#ffd166",
+        "#cdb4db"
+
+    ];
+
+
+    for (
+        let burst = 0;
+        burst < 3;
+        burst++
+    ) {
+
+        setTimeout(
+            function() {
+
+                const x =
+                    Math.random()
+                    * window.innerWidth
+                    * 0.7
+                    + window.innerWidth * 0.15;
+
+
+                const y =
+                    Math.random()
+                    * window.innerHeight
+                    * 0.5
+                    + window.innerHeight * 0.2;
+
+
+                for (
+                    let i = 0;
+                    i < 40;
+                    i++
+                ) {
+
+                    const particle =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    particle.className =
+                        "particle";
+
+
+                    particle.style.left =
+                        x + "px";
+
+
+                    particle.style.top =
+                        y + "px";
+
+
+                    particle.style.background =
+                        colors[
+                            Math.floor(
+                                Math.random()
+                                * colors.length
+                            )
+                        ];
+
+
+                    const angle =
+                        Math.random()
+                        * Math.PI
+                        * 2;
+
+
+                    const distance =
+                        Math.random()
+                        * 150
+                        + 50;
+
+
+                    const endX =
+                        Math.cos(angle)
+                        * distance;
+
+
+                    const endY =
+                        Math.sin(angle)
+                        * distance;
+
+
+                    screen.appendChild(
+                        particle
+                    );
+
+
+                    particle.animate(
+
+                        [
+                            {
+                                transform:
+                                    "translate(-50%, -50%)",
+                                opacity: 1
+                            },
+
+                            {
+                                transform:
+                                    `translate(
+                                        calc(-50% + ${endX}px),
+                                        calc(-50% + ${endY}px)
+                                    )`,
+                                opacity: 0
+                            }
+
+                        ],
+
+                        {
+                            duration: 1000,
+                            easing: "ease-out"
+                        }
+
+                    );
+
+
+                    setTimeout(
+                        function() {
+
+                            particle.remove();
+
+                        },
+                        1000
+                    );
+
+                }
+
+            },
+            burst * 500
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+   처음으로
+================================================== */
+
+function backToMenu() {
+
+    showScreen("menu");
+
+}
+
+
+function backToScrapbookStart() {
+
+    scrapIndex = 0;
+
+    updateScrap();
+
+}
+
+
+function backToManualStart() {
+
+    manualIndex = 0;
+
+    updateManual();
+
+    showScreen("manual");
+
+}
+
+
+/* ==================================================
+   쿠폰함
+================================================== */
+
+function openCoupon() {
+
+    showScreen("coupon-question");
+
+}
+
+
+function openCouponList() {
+
+    updateCouponList();
+
+    showScreen("coupon");
+
+}
+
+
+/* ==================================================
+   쿠폰
+================================================== */
+
+const coupons = [
+
+    {
+        title:
+            "데이트 장소 결정권",
+
+        description:
+            "데이트 장소를 고를 수 있는 쿠폰!"
+    },
+
+    {
+        title:
+            "간식 사주기 쿠폰",
+
+        description:
+            "먹고 싶은 간식 하나 사주기"
+    },
+
+    {
+        title:
+            "원하는 날짜 데이트 쿠폰",
+
+        description:
+            "원하는 날에 같이 데이트하기"
+    },
+
+    {
+        title:
+            "삐짐 면제권",
+
+        description:
+            "삐졌을 때 무조건 봐주는 쿠폰"
+    },
+
+    {
+        title:
+            "뭐든 들어주는 소원권",
+
+        description:
+            "가능한 선에서 뭐든 들어드립니다"
+    },
+
+    {
+        title:
+            "먹고 싶은 거 사주기 쿠폰",
+
+        description:
+            "먹고 싶은 음식 하나 사주기"
+    },
+
+    {
+        title:
+            "칭찬 10번 해주기 쿠폰",
+
+        description:
+            "칭찬 10번 해주기"
+    },
+
+    {
+        title:
+            "매점 사주기 쿠폰",
+
+        description:
+            "매점에서 3000원 한도로 하나 사주기"
+    },
+
+    {
+        title:
+            "메가커피 사주기 쿠폰",
+
+        description:
+            "매가커피에서 6000원 한도로 하나 사주기"
+    },
+
+    {
+        title:
+            "미쯔 사주기 쿠폰",
+
+        description:
+            "미쯔 사주기"
+    }
+
+];
+
+
+let selectedCoupon = 0;
+
+
+/* ==================================================
+   쿠폰 사용 여부 저장
+================================================== */
+
+let usedCoupons = [];
+// (실제 값은 아래 DOMContentLoaded에서 공유 저장소를 불러온 뒤 채워집니다)
+
+
+/* ==================================================
+   쿠폰 상세 화면 열기
+================================================== */
+
+function openCouponDetail(index) {
+
+    if (
+        index < 0 ||
+        index >= coupons.length
+    ) {
+
+        return;
+
+    }
+
+
+    selectedCoupon = index;
+
+
+    const coupon =
+        coupons[index];
+
+
+    const frontTitle =
+        document.getElementById(
+            "coupon-front-title"
+        );
+
+
+    if (frontTitle) {
+
+        frontTitle.textContent =
+            coupon.title;
+
+    }
+
+
+    const backDescription =
+        document.getElementById(
+            "coupon-back-description"
+        );
+
+
+    if (backDescription) {
+
+        backDescription.textContent =
+            coupon.description;
+
+    }
+
+
+    const card =
+        document.getElementById(
+            "coupon-card"
+        );
+
+
+    if (card) {
+
+        card.classList.remove(
+            "flipped"
+        );
+
+    }
+
+
+    const checkbox =
+        document.getElementById(
+            "coupon-check"
+        );
+
+
+    if (checkbox) {
+
+        checkbox.checked =
+            usedCoupons.includes(index);
+
+    }
+
+
+    showScreen("coupon-detail");
+
+
+    setTimeout(
+        function() {
+
+            if (
+                currentScreen ===
+                "coupon-detail"
+            ) {
+
+                if (card) {
+
+                    card.classList.add(
+                        "flipped"
+                    );
+
+                }
+
+            }
+
+        },
+        600
+    );
+
+}
+
+
+/* ==================================================
+   쿠폰 뒤집기
+================================================== */
+
+function flipCoupon() {
+
+    const card =
+        document.getElementById(
+            "coupon-card"
+        );
+
+
+    if (!card) {
+
+        return;
+
+    }
+
+
+    card.classList.toggle(
+        "flipped"
+    );
+
+}
+
+
+/* ==================================================
+   쿠폰 사용
+================================================== */
+
+function useCoupon() {
+
+    const checkbox =
+        document.getElementById(
+            "coupon-check"
+        );
+
+
+    if (!checkbox) {
+
+        return;
+
+    }
+
+
+    if (checkbox.checked) {
+
+        if (
+            !usedCoupons.includes(
+                selectedCoupon
+            )
+        ) {
+
+            usedCoupons.push(
+                selectedCoupon
+            );
+
+        }
+
+    } else {
+
+        usedCoupons =
+            usedCoupons.filter(
+                function(index) {
+
+                    return (
+                        index !==
+                        selectedCoupon
+                    );
+
+                }
+            );
+
+    }
+
+
+    sharedState.usedCoupons = usedCoupons;
+    saveSharedState();
+
+
+    updateCouponList();
+
+}
+
+
+/* ==================================================
+   쿠폰 목록 사용 여부 표시
+================================================== */
+
+function updateCouponList() {
+
+    coupons.forEach(
+        function(coupon, index) {
+
+            const usedText =
+                document.getElementById(
+                    "coupon-used-" + index
+                );
+
+
+            if (!usedText) {
+
+                return;
+
+            }
+
+
+            if (
+                usedCoupons.includes(index)
+            ) {
+
+                usedText.textContent =
+                    "✓ 사용함";
+
+            } else {
+
+                usedText.textContent =
+                    "";
+
+            }
+
+        }
+    );
+
+}
+
+
+/* ==================================================
+   초기 쿠폰 상태
+================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        loadSharedState().then(function() {
+
+            usedCoupons = sharedState.usedCoupons;
+
+            updateCouponList();
+
+            loadBucketList();
+
+        });
+
+    }
+);
+
+</script>
+
+</body>
+</html>
